@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, SafeAreaView } from 'react-native'
 import * as Animatable from 'react-native-animatable'
 import { connect } from 'react-redux'
 import {
@@ -20,14 +20,14 @@ class SplashScreen extends Component {
 
   render () {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <View style={styles.groupContainer}>
           <Animatable.Text animation='slideInLeft' style={styles.title}>COINDATA</Animatable.Text>
           <Animatable.View style={styles.vLine} />
           <Animatable.Text animation='fadeInUp' style={styles.subTitle}>Coinranking V2</Animatable.Text>
         </View>
         <BarIndicator color={Colors.facebook} style={styles.activity} />
-      </View>
+      </SafeAreaView>
     )
   }
 }
