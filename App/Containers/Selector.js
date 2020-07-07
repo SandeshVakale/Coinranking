@@ -7,6 +7,8 @@ import { connect } from 'react-redux'
 // Styles
 import styles from './Styles/SelectorStyle'
 import AppBar from '../Components/AppBar'
+import { ListItem } from 'react-native-elements'
+import TimePeriodActions from '../Redux/TimePeriodRedux'
 
 class Selector extends Component {
   // constructor (props) {
@@ -15,9 +17,24 @@ class Selector extends Component {
   // }
 
   render () {
+    const { list, onPressItem, itemName } = this.props.navigation.state.params
     return (
       <View style={styles.container}>
         <AppBar title={'Select'} iconLeft={'chevron-left'} onPressLeft={() => this.props.navigation.goBack()} />
+        {
+          list.map((item, i) => (
+            <ListItem
+              key={i}
+              title={item.name}
+              bottomDivider
+              checkmark={itemName === item.name}
+              onPress={() => {
+                onPressItem(item)
+                this.props.navigation.goBack()
+              }}
+            />
+          ))
+        }
       </View>
     )
   }
@@ -25,11 +42,13 @@ class Selector extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    timePeriod: state.timePeriod
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    setTimePeriod: () => dispatch(TimePeriodActions.timePeriodRequest())
   }
 }
 

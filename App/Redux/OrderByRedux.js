@@ -4,28 +4,24 @@ import Immutable from 'seamless-immutable'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  uuidRequest: ['data']
+  orderByRequest: ['data']
 })
 
-export const UuidTypes = Types
+export const OrderByTypes = Types
 export default Creators
 
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
   data: {
-    iconUrl: 'https://cdn.coinranking.com/fz3P5lsJY/eur.svg',
-    name: 'Euro',
-    sign: '€',
-    symbol: 'EUR',
-    type: 'fiat',
-    uuid: '5k-_VTxqtCEI'
+    name: 'Coinranking',
+    value: 'coinranking'
   }
 })
 
 /* ------------- Selectors ------------- */
 
-export const UuidSelectors = {
+export const OrderBySelectors = {
   getData: state => state.data
 }
 
@@ -35,8 +31,9 @@ export const UuidSelectors = {
 export const request = (state, { data }) =>
   state.merge({ data })
 
+
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.UUID_REQUEST]: request
+  [Types.ORDER_BY_REQUEST]: request
 })

@@ -4,28 +4,21 @@ import Immutable from 'seamless-immutable'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  uuidRequest: ['data']
+  timePeriodRequest: ['data']
 })
 
-export const UuidTypes = Types
+export const TimePeriodTypes = Types
 export default Creators
 
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  data: {
-    iconUrl: 'https://cdn.coinranking.com/fz3P5lsJY/eur.svg',
-    name: 'Euro',
-    sign: '€',
-    symbol: 'EUR',
-    type: 'fiat',
-    uuid: '5k-_VTxqtCEI'
-  }
+  data: { name: 'Day', value: '1d' }
 })
 
 /* ------------- Selectors ------------- */
 
-export const UuidSelectors = {
+export const TimePeriodSelectors = {
   getData: state => state.data
 }
 
@@ -38,5 +31,5 @@ export const request = (state, { data }) =>
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.UUID_REQUEST]: request
+  [Types.TIME_PERIOD_REQUEST]: request
 })
