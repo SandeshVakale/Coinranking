@@ -19,12 +19,14 @@ export function * getCurrencies (api) {
   // const currentData = yield select(CurrenciesSelectors.getData)
   // make the call to the api
   const response = yield call(api.getCurrencies)
+
+  console.log('response', response)
   // success?
   if (response.ok) {
     // You might need to change the response here - do this with a 'transform',
     // located in ../Transforms/. Otherwise, just pass the data back from the api.
     yield put(CurrenciesActions.currenciesSuccess(response.data))
   } else {
-    yield put(CurrenciesActions.currenciesFailure(response.data))
+    yield put(CurrenciesActions.currenciesFailure(response))
   }
 }

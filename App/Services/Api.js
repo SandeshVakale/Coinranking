@@ -39,7 +39,7 @@ const create = (baseURL = Secrets.API_URL) => {
   // const getRoot = () => api.get('')
   // const getRate = () => api.get('rate_limit')
   // const getUser = (username) => api.get('search/users', {q: username})
-  const getCurrencies = () => api.get('reference-currencies')
+  const getCurrencies = () => api.get('reference-currencies', { limit: 100 })
 
   // ------
   // STEP 3

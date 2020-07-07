@@ -4,9 +4,9 @@ import Immutable from 'seamless-immutable'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  currenciesRequest: null,
+  currenciesRequest: ['offset'],
   currenciesSuccess: ['payload'],
-  currenciesFailure: null
+  currenciesFailure: ['payload']
 })
 
 export const CurrenciesTypes = Types
@@ -40,8 +40,10 @@ export const success = (state, action) => {
 }
 
 // Something went wrong somewhere.
-export const failure = state =>
-  state.merge({ fetching: false, error: true, payload: null })
+export const failure = (state, action) => {
+  const { payload } = action
+  return state.merge({ fetching: false, error: true, payload })
+}
 
 /* ------------- Hookup Reducers To Types ------------- */
 

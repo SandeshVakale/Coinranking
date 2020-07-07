@@ -17,6 +17,8 @@ class Settings extends Component {
   // }
 
   render () {
+    const { uuid } = this.props
+
     const list = [
       {
         title: 'Time Period',
@@ -27,7 +29,7 @@ class Settings extends Component {
       {
         title: 'Currency',
         icon: 'euro-symbol',
-        subtitle: 'EUR',
+        subtitle: uuid.data && uuid.data.symbol,
         onPress: () => this.props.navigation.navigate('Currencies')
       },
       {
@@ -66,6 +68,7 @@ class Settings extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    uuid: state.uuid
   }
 }
 
