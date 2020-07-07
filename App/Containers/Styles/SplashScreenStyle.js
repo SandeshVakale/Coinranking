@@ -26,10 +26,5 @@ export default StyleSheet.create({
     fontSize: 18,
     color: colors.banner,
     fontFamily: Fonts.type.base
-  },
-  activity: {
-    position: 'absolute',
-    bottom: 100,
-    alignSelf: 'center'
   }
 })

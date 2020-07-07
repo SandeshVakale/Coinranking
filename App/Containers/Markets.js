@@ -7,6 +7,8 @@ import { connect } from 'react-redux'
 // Styles
 import styles from './Styles/MarketsStyle'
 import AppBar from '../Components/AppBar'
+import { Icon, SearchBar } from 'react-native-elements'
+import { Colors } from '../Themes'
 
 class Markets extends Component {
   // constructor (props) {
@@ -14,10 +16,33 @@ class Markets extends Component {
   //   this.state = {}
   // }
 
+  state = {
+    search: ''
+  };
+
+  updateSearch = (search) => {
+    this.setState({ search })
+  };
+
   render () {
+    const { search } = this.state
     return (
       <View style={styles.container}>
         <AppBar title={'Markets'} onPressRight={() => this.props.navigation.navigate('Settings')} onPressLeft={() => this.props.navigation.navigate('Search')} iconRight={'settings'} iconLeft={'search'} />
+        <SearchBar
+          placeholder='Quick Search'
+          onChangeText={this.updateSearch}
+          value={search}
+          platform={'android'}
+          containerStyle={styles.searchBar}
+          searchIcon={<Icon
+            name='text-box-search'
+            type='material-community'
+            color={Colors.facebook}
+            size={30}
+          />}
+          leftIconContainerStyle={{ paddingLeft: 10 }}
+        />
       </View>
     )
   }

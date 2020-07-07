@@ -73,7 +73,25 @@ const ApplicationStyles = {
       borderColor: Colors.ember,
       alignItems: 'center',
       textAlign: 'center'
-    }
+    },
+    activity: {
+      position: 'absolute',
+      bottom: 100,
+      alignSelf: 'center'
+    },
+    searchBar: {
+      borderRadius: 60,
+      width: '90%',
+      alignSelf: 'center',
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 4
+      },
+      shadowOpacity: 0.32,
+      shadowRadius: 5.46,
+      elevation: 9,
+      marginTop: '15%' }
   }
 }
 

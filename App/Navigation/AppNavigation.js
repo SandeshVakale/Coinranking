@@ -28,7 +28,8 @@ const TabNavigator = createBottomTabNavigator({
   tabBarOptions: {
     activeTintColor: Colors.facebook,
     showLabel: false,
-    style: styles.appBottomBarStyle
+    style: styles.appBottomBarStyle,
+    safeAreaInset: { bottom: 'never', top: 'never' }
   },
   defaultNavigationOptions: ({ navigation }) => ({
     tabBarIcon: ({ focused, horizontal, tintColor }) => {
