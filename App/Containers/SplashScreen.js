@@ -18,6 +18,10 @@ class SplashScreen extends Component {
   //   this.state = {}
   // }
 
+  componentDidMount () {
+    this.props.navigation.navigate('TabNavigator')
+  }
+
   render () {
     return (
       <SafeAreaView style={styles.container}>

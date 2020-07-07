@@ -255,6 +255,8 @@ PODS:
     - React
   - RNI18n (2.0.14):
     - React
+  - RNReanimated (1.9.0):
+    - React
   - RNScreens (2.9.0):
     - React
   - RNVectorIcons (6.1.0):
@@ -296,6 +298,7 @@ DEPENDENCIES:
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNI18n (from `../node_modules/react-native-i18n`)
+  - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -367,6 +370,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-gesture-handler"
   RNI18n:
     :path: "../node_modules/react-native-i18n"
+  RNReanimated:
+    :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNVectorIcons:
@@ -407,6 +412,7 @@ SPEC CHECKSUMS:
   RNDeviceInfo: b6e650fbd234732c759544218657d549b4339038
   RNGestureHandler: 5329a942fce3d41c68b84c2c2276ce06a696d8b0
   RNI18n: ae012568644105311254f877f32e4157e063217f
+  RNReanimated: b5ccb50650ba06f6e749c7c329a1bc3ae0c88b43
   RNScreens: c526239bbe0e957b988dacc8d75ac94ec9cb19da
   RNVectorIcons: ac7bf6bfeafaf3ad34552cdc6eed6fb8c4b7c940
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
