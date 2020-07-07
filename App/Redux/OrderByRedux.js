@@ -31,7 +31,6 @@ export const OrderBySelectors = {
 export const request = (state, { data }) =>
   state.merge({ data })
 
-
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {

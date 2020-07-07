@@ -9,7 +9,9 @@ export const reducers = combineReducers({
   search: require('./SearchRedux').reducer,
   currency: require('./CurrenciesRedux').reducer,
   uuid: require('./UuidRedux').reducer,
-  timePeriod: require('./TimePeriodRedux').reducer
+  timePeriod: require('./TimePeriodRedux').reducer,
+  orderBy: require('./OrderByRedux').reducer,
+  orderDirection: require('./OrderDirectionRedux').reducer
 })
 
 export default () => {
