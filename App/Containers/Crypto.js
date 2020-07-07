@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { ScrollView, Text } from 'react-native'
+import { View, Text } from 'react-native'
 import { connect } from 'react-redux'
+import AppBar from '../Components/AppBar'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
@@ -15,9 +16,9 @@ class Crypto extends Component {
 
   render () {
     return (
-      <ScrollView style={styles.container}>
-        <Text>Crypto Container</Text>
-      </ScrollView>
+      <View style={styles.container}>
+        <AppBar title={'Cryptocurrencies'} onPressRight={() => this.props.navigation.navigate('Settings')} onPressLeft={() => this.props.navigation.navigate('Search')} iconRight={'settings'} iconLeft={'search'} />
+      </View>
     )
   }
 }

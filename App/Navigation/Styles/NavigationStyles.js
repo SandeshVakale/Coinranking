@@ -17,7 +17,7 @@ export default StyleSheet.create({
     shadowColor: Colors.coal,
     shadowOffset: {
       width: 10,
-      height: 10
+      height: 5
     },
     shadowOpacity: 0.6,
     shadowRadius: 60

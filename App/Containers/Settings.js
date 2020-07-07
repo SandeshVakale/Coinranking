@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { ScrollView, Text } from 'react-native'
+import { View } from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
 // Styles
 import styles from './Styles/SettingsStyle'
+import AppBar from '../Components/AppBar'
 
 class Settings extends Component {
   // constructor (props) {
@@ -15,9 +16,9 @@ class Settings extends Component {
 
   render () {
     return (
-      <ScrollView style={styles.container}>
-        <Text>Settings Container</Text>
-      </ScrollView>
+      <View style={styles.container}>
+        <AppBar title={'Settings'} iconLeft={'chevron-left'} onPressLeft={() => this.props.navigation.goBack()} />
+      </View>
     )
   }
 }
