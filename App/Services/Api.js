@@ -41,7 +41,7 @@ const create = (baseURL = Secrets.API_URL) => {
   // const getUser = (username) => api.get('search/users', {q: username})
   const getCurrencies = () => api.get('reference-currencies', { limit: 100 })
   const getCoin = ({ uuid, referenceCurrencyUuid, timePeriod }) => api.get('coin', { uuid, referenceCurrencyUuid, timePeriod })
-  const getCoins = ({ referenceCurrencyUuid, timePeriod, orderBy, orderDirection }) => api.get('coins', { referenceCurrencyUuid, timePeriod, orderBy, orderDirection })
+  const getCoins = ({ referenceCurrencyUuid, timePeriod, orderBy, orderDirection }) => api.get('coins', { referenceCurrencyUuid, timePeriod, orderBy, orderDirection, limit: 100 })
 
   // ------
   // STEP 3

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { View } from 'react-native'
+import { FlatList, View } from 'react-native'
 import { connect } from 'react-redux'
 import { SearchBar, Icon } from 'react-native-elements'
 import AppBar from '../Components/AppBar'
 import Error from '../Components/Error'
+import CoinCard from '../Components/CoinCard'
 
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 import CoinsActions from '../Redux/CoinsRedux'
@@ -11,6 +12,7 @@ import CoinsActions from '../Redux/CoinsRedux'
 // Styles
 import styles from './Styles/CryptoStyle'
 import { Colors } from '../Themes'
+import { BarIndicator } from 'react-native-indicators'
 
 const Crypto = (props) => {
   const { getCoins, refCurrencyUuid, timePeriod, orderBy, orderDirection, coins } = props
@@ -18,6 +20,7 @@ const Crypto = (props) => {
     getCoins(refCurrencyUuid.data.uuid, timePeriod.data.value, orderBy.data.value, orderDirection.data.value)
   }, [ refCurrencyUuid, timePeriod, orderBy, orderDirection ])
 
+  const keyExtractor = (item, index) => index.toString()
   const [search, setSearch] = useState('')
   return (
     <View style={styles.container}>
@@ -37,6 +40,13 @@ const Crypto = (props) => {
         leftIconContainerStyle={{ paddingLeft: 10 }}
         />
       <Error data={coins} onPress={() => getCoins(refCurrencyUuid.data.uuid, timePeriod.data.value, orderBy.data.value, orderDirection.data.value)} />
+      {coins.fetching === false && coins.error === null
+        ? <FlatList
+          keyExtractor={keyExtractor}
+          data={coins.payload.data.coins}
+          renderItem={(item) => <CoinCard data={item} />}
+          ListFooterComponent={() => <View style={{ height: 100 }} />}
+        /> : <BarIndicator color={Colors.facebook} style={styles.activity} />}
     </View>
   )
 }
