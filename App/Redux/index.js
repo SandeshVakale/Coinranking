@@ -6,7 +6,12 @@ import rootSaga from '../Sagas/'
 export const reducers = combineReducers({
   nav: require('./NavigationRedux').reducer,
   github: require('./GithubRedux').reducer,
-  search: require('./SearchRedux').reducer
+  search: require('./SearchRedux').reducer,
+  currency: require('./CurrenciesRedux').reducer,
+  uuid: require('./UuidRedux').reducer,
+  timePeriod: require('./TimePeriodRedux').reducer,
+  orderBy: require('./OrderByRedux').reducer,
+  orderDirection: require('./OrderDirectionRedux').reducer
 })
 
 export default () => {
