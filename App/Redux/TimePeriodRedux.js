@@ -13,7 +13,7 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  data: { name: 'Day', value: '1d' }
+  data: { name: 'Day', value: '24h' }
 })
 
 /* ------------- Selectors ------------- */

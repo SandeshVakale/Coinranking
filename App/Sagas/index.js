@@ -8,12 +8,16 @@ import DebugConfig from '../Config/DebugConfig'
 // import { StartupTypes } from '../Redux/StartupRedux'
 // import { GithubTypes } from '../Redux/GithubRedux'
 import { CurrenciesTypes } from '../Redux/CurrenciesRedux'
+import { CoinTypes } from '../Redux/CoinRedux'
+import { CoinsTypes } from '../Redux/CoinsRedux'
 
 /* ------------- Sagas ------------- */
 //
 // import { startup } from './StartupSagas'
 // import { getUserAvatar } from './GithubSagas'
 import { getCurrencies } from './CurrenciesSagas'
+import { getCoin } from './CoinSagas'
+import { getCoins } from './CoinsSagas'
 
 /* ------------- API ------------- */
 
@@ -30,6 +34,8 @@ export default function * root () {
 
     // some sagas receive extra parameters in addition to an action
     // takeLatest(GithubTypes.USER_REQUEST, getUserAvatar, api),
-    takeLatest(CurrenciesTypes.CURRENCIES_REQUEST, getCurrencies, api)
+    takeLatest(CurrenciesTypes.CURRENCIES_REQUEST, getCurrencies, api),
+    takeLatest(CoinTypes.COIN_REQUEST, getCoin, api),
+    takeLatest(CoinsTypes.COINS_REQUEST, getCoins, api)
   ])
 }

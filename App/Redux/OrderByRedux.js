@@ -14,8 +14,8 @@ export default Creators
 
 export const INITIAL_STATE = Immutable({
   data: {
-    name: 'Coinranking',
-    value: 'coinranking'
+    name: 'Market Cap',
+    value: 'marketCap'
   }
 })
 

@@ -9,7 +9,8 @@ import colors from '../Themes/Colors'
 export default class Error extends Component {
   // // Prop type warnings
   static propTypes = {
-    currency: PropTypes.object,
+    data: PropTypes.object,
+    onPress: PropTypes.func
   }
 
   // // Defaults for props

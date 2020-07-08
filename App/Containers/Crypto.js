@@ -1,61 +1,59 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
 import { SearchBar, Icon } from 'react-native-elements'
 import AppBar from '../Components/AppBar'
+import Error from '../Components/Error'
 
 // Add Actions - replace 'Your' with whatever your reducer is called :)
-// import YourActions from '../Redux/YourRedux'
+import CoinsActions from '../Redux/CoinsRedux'
 
 // Styles
 import styles from './Styles/CryptoStyle'
 import { Colors } from '../Themes'
 
-class Crypto extends Component {
-  // constructor (props) {
-  //   super(props)
-  //   this.state = {}
+const Crypto = (props) => {
+  const { getCoins, refCurrencyUuid, timePeriod, orderBy, orderDirection, coins } = props
+  useEffect(() => {
+    getCoins(refCurrencyUuid.data.uuid, timePeriod.data.value, orderBy.data.value, orderDirection.data.value)
+  }, [ refCurrencyUuid, timePeriod, orderBy, orderDirection ])
 
-  state = {
-    search: ''
-  };
-
-  updateSearch = (search) => {
-    this.setState({ search })
-  };
-  // }
-
-  render () {
-    const { search } = this.state
-    return (
-      <View style={styles.container}>
-        <AppBar title={'Cryptocurrencies'} onPressRight={() => this.props.navigation.navigate('Settings')} onPressLeft={() => this.props.navigation.navigate('Search')} iconRight={'settings'} iconLeft={'search'} />
-        <SearchBar
-          placeholder='Quick Search'
-          onChangeText={this.updateSearch}
-          value={search}
-          platform={'android'}
-          containerStyle={styles.searchBar}
-          searchIcon={<Icon
-            name='text-box-search'
-            type='material-community'
-            color={Colors.facebook}
-            size={30}
+  const [search, setSearch] = useState('')
+  return (
+    <View style={styles.container}>
+      <AppBar title={'Cryptocurrencies'} onPressRight={() => props.navigation.navigate('Settings')} onPressLeft={() => props.navigation.navigate('Search')} iconRight={'settings'} iconLeft={'search'} />
+      <SearchBar
+        placeholder='Quick Search'
+        onChangeText={setSearch}
+        value={search}
+        platform={'android'}
+        containerStyle={styles.searchBar}
+        searchIcon={<Icon
+          name='text-box-search'
+          type='material-community'
+          color={Colors.facebook}
+          size={30}
           />}
-          leftIconContainerStyle={{ paddingLeft: 10 }}
+        leftIconContainerStyle={{ paddingLeft: 10 }}
         />
-      </View>
-    )
-  }
+      <Error data={coins} onPress={() => getCoins(refCurrencyUuid.data.uuid, timePeriod.data.value, orderBy.data.value, orderDirection.data.value)} />
+    </View>
+  )
 }
 
 const mapStateToProps = (state) => {
   return {
+    refCurrencyUuid: state.uuid,
+    timePeriod: state.timePeriod,
+    orderBy: state.orderBy,
+    orderDirection: state.orderDirection,
+    coins: state.coins
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    getCoins: (referenceCurrencyUuid, timePeriod, orderBy, orderDirection) => dispatch(CoinsActions.coinsRequest(referenceCurrencyUuid, timePeriod, orderBy, orderDirection))
   }
 }
 

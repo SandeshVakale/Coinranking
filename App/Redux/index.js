@@ -11,7 +11,9 @@ export const reducers = combineReducers({
   uuid: require('./UuidRedux').reducer,
   timePeriod: require('./TimePeriodRedux').reducer,
   orderBy: require('./OrderByRedux').reducer,
-  orderDirection: require('./OrderDirectionRedux').reducer
+  orderDirection: require('./OrderDirectionRedux').reducer,
+  coin: require('./CoinRedux').reducer,
+  coins: require('./CoinsRedux').reducer
 })
 
 export default () => {
