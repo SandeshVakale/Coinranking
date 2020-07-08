@@ -42,11 +42,11 @@ class Currencies extends Component {
     )
   }
   render () {
-    const { currency } = this.props
+    const { currency, getCurrencies } = this.props
     return (
       <View style={styles.container}>
         <AppBar title={'Currencies'} iconLeft={'chevron-left'} onPressLeft={() => this.props.navigation.goBack()} />
-        <Error data={currency} />
+        <Error data={currency} onPress={getCurrencies} />
         {currency.fetching === false && currency.error === null
           ? <FlatList
             keyExtractor={this.keyExtractor}

@@ -48,8 +48,6 @@ const ApplicationStyles = {
     darkLabelContainer: {
       padding: Metrics.smallMargin,
       paddingBottom: Metrics.doubleBaseMargin,
-      borderBottomColor: Colors.border,
-      borderBottomWidth: 1,
       marginBottom: Metrics.baseMargin
     },
     darkLabel: {
