@@ -21,7 +21,7 @@ const Exchanges = (props) => {
 
   return (
     <View style={styles.container}>
-      <AppBar title={'Exchanges'} onPressRight={() => this.props.navigation.navigate('Settings')} onPressLeft={() => this.props.navigation.navigate('Search')} iconRight={'settings'} iconLeft={'search'} />
+      <AppBar title={'Exchanges'} onPressRight={() => props.navigation.navigate('Settings')} onPressLeft={() => props.navigation.navigate('Search')} iconRight={'settings'} iconLeft={'search'} />
       <Filter {...props} />
       <SearchBar
         placeholder='Quick Search'
