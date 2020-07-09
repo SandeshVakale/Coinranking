@@ -5677,6 +5677,11 @@ escape-string-regexp@1.0.5, escape-string-regexp@^1.0.2, escape-string-regexp@^1
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
 
+escape-string-regexp@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-2.0.0.tgz#a30304e99daa32e23b2fd20f51babd07cffca344"
+  integrity sha512-UpzcLCXolUWcNu5HtVMHYdXJjArjsF9C0aNnquZYY4uW/Vu0miy5YoWvbV345HauVvcAUnpRuhMMcqTcGOY2+w==
+
 escodegen@^1.9.1:
   version "1.14.3"
   resolved "https://registry.yarnpkg.com/escodegen/-/escodegen-1.14.3.tgz#4e7b81fba61581dc97582ed78cab7f0e8d63f503"
@@ -7525,7 +7530,7 @@ interpret@^1.0.0, interpret@^1.1.0:
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.4.0.tgz#665ab8bc4da27a774a40584e812e3e0fa45b1a1e"
   integrity sha512-agE4QfB2Lkp9uICn7BAqoscw4SZP9kTE2hxiFI3jBPmXJfdqiahTbUuKGsMoN2GtqL9AxhYioAcVvgsb1HvRbA==
 
-invariant@^2.2.2, invariant@^2.2.3, invariant@^2.2.4:
+invariant@2.2.4, invariant@^2.2.2, invariant@^2.2.3, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
@@ -10979,7 +10984,7 @@ react-native-swipe-gestures@^1.0.2:
   resolved "https://registry.yarnpkg.com/react-native-swipe-gestures/-/react-native-swipe-gestures-1.0.5.tgz#a172cb0f3e7478ccd681fd36b8bfbcdd098bde7c"
   integrity sha512-Ns7Bn9H/Tyw278+5SQx9oAblDZ7JixyzeOczcBK8dipQk2pD7Djkcfnf1nB/8RErAmMLL9iXgW0QHqiII8AhKw==
 
-react-native-tab-view@^2.11.0:
+react-native-tab-view@^2.11.0, react-native-tab-view@^2.14.4:
   version "2.14.4"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-2.14.4.tgz#740007e62c8723c6813b8c8a05caaaf82c816620"
   integrity sha512-oqkCflPFuZwDTbyY2WaN0377akSsmcttuYACR9LT7htZfO/tKR2Z/ynj1tbv2cz2esGuVICoga9cetN1lPimog==
@@ -10992,6 +10997,14 @@ react-native-vector-icons@7.0.0:
     lodash "^4.17.15"
     prop-types "^15.7.2"
     yargs "^15.0.2"
+
+react-native-webview@^10.3.2:
+  version "10.3.2"
+  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-10.3.2.tgz#c634946152099c95d521a3abc71065d1d642e192"
+  integrity sha512-4A8FKL/puonkqQ1FOKd+iPulqRXCG4inmIK4pQ60zv9Ua+YkBKLxxofQiCvRwIXSSgAXYT+AE3rOHr3bx4A/cw==
+  dependencies:
+    escape-string-regexp "2.0.0"
+    invariant "2.2.4"
 
 react-native@0.62.2:
   version "0.62.2"
