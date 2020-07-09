@@ -24,7 +24,7 @@ class Settings extends Component {
     const timePeriodData = [
       {
         name: 'Day',
-        value: '1d'
+        value: '24h'
       },
       {
         name: 'Week',
@@ -45,10 +45,6 @@ class Settings extends Component {
     ]
 
     const orderByData = [
-      {
-        name: 'Coinranking',
-        value: 'coinranking'
-      },
       {
         name: 'Price',
         value: 'price'
