@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import { connect } from 'react-redux'
 import { SearchBar, Icon } from 'react-native-elements'
-import { SearchableFlatList } from "react-native-searchable-list"
+import { SearchableFlatList } from 'react-native-searchable-list'
 import AppBar from '../Components/AppBar'
 import Error from '../Components/Error'
 import CoinCard from '../Components/CoinCard'
+import Filter from '../Components/Filter'
 
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 import CoinsActions from '../Redux/CoinsRedux'
@@ -23,11 +24,10 @@ const Crypto = (props) => {
 
   const keyExtractor = (item, index) => index.toString()
   const [search, setSearch] = useState('')
-  console.log('search', search)
   return (
     <View style={styles.container}>
       <AppBar title={'Cryptocurrencies'} onPressRight={() => props.navigation.navigate('Settings')} onPressLeft={() => props.navigation.navigate('Search')} iconRight={'settings'} iconLeft={'search'} />
-      <Text style={[styles.sectionText, { color: Colors.charcoal }]} >{refCurrencyUuid.data.name} | {timePeriod.data.name} | {orderBy.data.name} | {orderDirection.data.name} </Text>
+      <Filter {...props} />
       <SearchBar
         placeholder='Quick Search'
         onChangeText={setSearch}
