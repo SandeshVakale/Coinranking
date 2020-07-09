@@ -25,7 +25,7 @@ export default class Error extends Component {
         { data.error === true && data.payload && <Animatable.View animation='fadeInUp' style={styles.darkLabelContainer}>
           <Icon name={'error'} color={colors.facebook} size={80} type={'material-icon'} />
           <Text style={styles.sectionTitle}>{data.payload.status}</Text>
-          <Text style={[styles.sectionText, { color: colors.error }]}>{data.payload.data && data.payload.data.message}</Text>
+          <Text style={[styles.sectionText, { color: colors.error }]}>{(data.payload.data && data.payload.data.message) || data.payload.problem}</Text>
           <Button title={'Retry'} onPress={onPress} type={'outline'} />
         </Animatable.View> }
       </View>

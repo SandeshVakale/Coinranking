@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { FlatList, View } from 'react-native'
+import { Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import { SearchBar, Icon } from 'react-native-elements'
+import { SearchableFlatList } from "react-native-searchable-list"
 import AppBar from '../Components/AppBar'
 import Error from '../Components/Error'
 import CoinCard from '../Components/CoinCard'
@@ -22,9 +23,11 @@ const Crypto = (props) => {
 
   const keyExtractor = (item, index) => index.toString()
   const [search, setSearch] = useState('')
+  console.log('search', search)
   return (
     <View style={styles.container}>
       <AppBar title={'Cryptocurrencies'} onPressRight={() => props.navigation.navigate('Settings')} onPressLeft={() => props.navigation.navigate('Search')} iconRight={'settings'} iconLeft={'search'} />
+      <Text style={[styles.sectionText, { color: Colors.charcoal }]} >{refCurrencyUuid.data.name} | {timePeriod.data.name} | {orderBy.data.name} | {orderDirection.data.name} </Text>
       <SearchBar
         placeholder='Quick Search'
         onChangeText={setSearch}
@@ -41,8 +44,10 @@ const Crypto = (props) => {
         />
       <Error data={coins} onPress={() => getCoins(refCurrencyUuid.data.uuid, timePeriod.data.value, orderBy.data.value, orderDirection.data.value)} />
       {coins.fetching === false && coins.error === null
-        ? <FlatList
+        ? <SearchableFlatList
+          searchAttribute={'name'}
           keyExtractor={keyExtractor}
+          searchTerm={search}
           data={coins.payload.data.coins}
           renderItem={(item) => <CoinCard data={item} />}
           ListFooterComponent={() => <View style={{ height: 100 }} />}

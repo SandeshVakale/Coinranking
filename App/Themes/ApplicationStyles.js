@@ -81,15 +81,15 @@ const ApplicationStyles = {
       borderRadius: 60,
       width: '90%',
       alignSelf: 'center',
-      shadowColor: '#000',
+      shadowColor: Colors.coal,
       shadowOffset: {
         width: 0,
         height: 4
       },
       shadowOpacity: 0.32,
       shadowRadius: 5.46,
-      elevation: 9,
-      marginTop: '15%' }
+      elevation: 9
+    }
   }
 }
 
