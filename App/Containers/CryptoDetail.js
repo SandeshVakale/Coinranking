@@ -11,7 +11,7 @@ import AppBar from '../Components/AppBar'
 import { Colors } from '../Themes'
 
 const Overview = (props) => {
-  return <CryptoOverview uuid={props.route.uuid} />
+  return <CryptoOverview uuid={props.route.uuid} {...props} />
 }
 
 const Exchanges = () => (
