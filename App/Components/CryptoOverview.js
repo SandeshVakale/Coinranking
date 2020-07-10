@@ -48,15 +48,7 @@ const CryptoOverview = (props) => {
             </View>
           </View>
           <Text style={[styles.sectionText, {color: Colors.charcoal}]}>Period {timePeriod.data.name} | Currency {refCurrencyUuid.data.name}</Text>
-          <View style={{ height: 300,
-            flexDirection: 'row',
-            shadowColor: coin.payload.data.coin.color || Colors.facebook,
-            shadowOffset: {
-              width: 5,
-              height: 15
-            },
-            shadowOpacity: 0.7,
-            shadowRadius: 3.84 }}>
+          <View style={[styles.graphContainer, {shadowColor: coin.payload.data.coin.color || Colors.facebook}]}>
             <YAxis
               style={{ marginHorizontal: 5 }}
               data={coin.payload.data.coin.sparkline}
@@ -79,22 +71,22 @@ const CryptoOverview = (props) => {
             </LineChart>
           </View>
           <View style={{ justifyContent: 'space-around', flexDirection: 'row' }} >
-            <View style={{flexDirection: 'column', alignItems: 'center'}} >
-              <Text style={[Fonts.style.h4, {fontWeight: 'bold', color: Colors.charcoal}]}>{_.ceil(coin.payload.data.coin.change, 2)}%</Text>
-              <Text style={[Fonts.type.base, {fontWeight: 'bold', color: Colors.charcoal}]}>{timePeriod.data.name} change</Text>
+            <View style={styles.textContainer} >
+              <Text style={[Fonts.style.h4, styles.textMain]}>{_.ceil(coin.payload.data.coin.change, 2)}%</Text>
+              <Text style={[Fonts.type.base, styles.textSub]}>{timePeriod.data.name} change</Text>
             </View>
-            <View style={{flexDirection: 'column', alignItems: 'center'}} >
-              <Text style={[Fonts.style.h4, {fontWeight: 'bold', color: Colors.charcoal}]}>{_.ceil(_.max(toNumbers(coin.payload.data.coin.sparkline)), 2)}</Text>
+            <View style={styles.textContainer} >
+              <Text style={[Fonts.style.h4, styles.textMain]}>{_.ceil(_.max(toNumbers(coin.payload.data.coin.sparkline)), 2)}</Text>
               <View style={{ flexDirection: 'row' }}>
                 <Icon name={'arrow-up-right'} size={16} type={'feather'} color={Colors.charcoal} />
-                <Text style={[Fonts.type.base, {fontWeight: 'bold', color: Colors.charcoal}]}>{timePeriod.data.name} Highest</Text>
+                <Text style={[Fonts.type.base, styles.textSub]}>{timePeriod.data.name} Highest</Text>
               </View>
             </View>
-            <View style={{flexDirection: 'column', alignItems: 'center'}} >
-              <Text style={[Fonts.style.h4, {fontWeight: 'bold', color: Colors.charcoal}]}>{_.ceil(_.min(toNumbers(coin.payload.data.coin.sparkline)), 2)}</Text>
+            <View style={styles.textContainer} >
+              <Text style={[Fonts.style.h4, styles.textMain]}>{_.ceil(_.min(toNumbers(coin.payload.data.coin.sparkline)), 2)}</Text>
               <View style={{ flexDirection: 'row' }}>
                 <Icon name={'arrow-down-right'} size={16} type={'feather'} color={Colors.charcoal} />
-                <Text style={[Fonts.type.base, {fontWeight: 'bold', color: Colors.charcoal}]}>{timePeriod.data.name} Lowest</Text>
+                <Text style={[Fonts.type.base, styles.textSub]}>{timePeriod.data.name} Lowest</Text>
               </View>
             </View>
           </View>
@@ -113,18 +105,18 @@ const CryptoOverview = (props) => {
             />)
           }
           </Card>}
-          <Card title={'Supply information'}>
+          {coin.payload.data.coin.supply.supply && <Card title={'Supply information'}>
             <PieChart data={[
               {
                 key: 1,
                 value: coin.payload.data.coin.supply.circulating,
-                svg: { fill: Colors.facebook }
+                svg: { fill: coin.payload.data.coin.color || Colors.facebook },
+                arc: { outerRadius: '130%', cornerRadius: 10 }
               },
               {
                 key: 2,
                 value: coin.payload.data.coin.supply.supply,
-                svg: { fill: coin.payload.data.coin.color || Colors.facebook },
-                arc: { outerRadius: '130%', cornerRadius: 10 }
+                svg: { fill: Colors.facebook }
               }]} style={{ height: 200 }}
               outerRadius={'70%'}
               innerRadius={10} />
@@ -145,7 +137,7 @@ const CryptoOverview = (props) => {
                 bottomDivider
               />
             </View>
-          </Card>
+          </Card>}
           <Card title={'Value statistics'}>
             <ListItem
               title={'Price to BTC'}
@@ -168,11 +160,11 @@ const CryptoOverview = (props) => {
               bottomDivider
             />
           </Card>
-          <Button
+          {coin.payload.data.coin.websiteUrl && <Button
             style={{ marginVertical: 20, width: '90%', alignSelf: 'center' }}
             title={coin.payload.data.coin.websiteUrl}
             type='outline'
-          />
+          />}
         </View> : <BarIndicator color={Colors.facebook} style={styles.activity} />}
     </ScrollView>
   )

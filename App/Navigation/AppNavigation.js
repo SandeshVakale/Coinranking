@@ -21,8 +21,8 @@ import React from 'react'
 
 const TabNavigator = createBottomTabNavigator({
   Crypto: { screen: Crypto },
-  Markets: { screen: Markets },
-  Exchanges: { screen: Exchanges }
+  Exchanges: { screen: Exchanges },
+  Markets: { screen: Markets }
 }, {
   // Default config for all screens
   headerMode: 'none',
