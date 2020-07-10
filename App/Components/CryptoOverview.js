@@ -27,11 +27,11 @@ const CryptoOverview = (props) => {
           <View style={{ justifyContent: 'center', alignItems: 'center' }} >
             <Image
               placeholderStyle={{ backgroundColor: Colors.transparent }}
-              source={coin.payload.data.coin.iconUrl && { uri: coin.payload.data.coin.iconUrl.replace(/\.(svg)($|\?)/, '.png$2') }}
+              source={_.get(coin, 'payload.data.coin.iconUrl') && { uri: _.get(coin, 'payload.data.coin.iconUrl').replace(/\.(svg)($|\?)/, '.png$2') }}
               style={{ width: 60,
                 height: 80,
                 marginTop: 10,
-                shadowColor: coin.payload.data.coin.color || Colors.facebook,
+                shadowColor: _.get(coin, 'payload.data.coin.color') || Colors.facebook,
                 resizeMode: 'contain',
                 shadowOffset: {
                   width: 2,
@@ -39,22 +39,22 @@ const CryptoOverview = (props) => {
                 },
                 shadowOpacity: 0.5,
                 shadowRadius: 3.84 }}
-              PlaceholderContent={<BarIndicator color={coin.payload.data.coin.color} style={{ backgroundColor: Colors.transparent }} />}
+              PlaceholderContent={<BarIndicator color={_.get(coin, 'payload.data.coin.color')} style={{ backgroundColor: Colors.transparent }} />}
         />
-            <Text style={{fontSize: 30, fontWeight: 'bold', color: Colors.charcoal}}>{refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} {_.ceil(coin.payload.data.coin.price, 2)}</Text>
+            <Text style={{fontSize: 30, fontWeight: 'bold', color: Colors.charcoal}}>{refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} {_.ceil(_.get(coin, 'payload.data.coin.price'), 2)}</Text>
             <View style={{ flexDirection: 'row' }}>
-              <Icon size={24} style={{ paddingHorizontal: 10 }} name={Math.sign(coin.payload.data.coin.change) === 1 ? 'trending-up-sharp' : 'trending-down-sharp'} color={Math.sign(coin.payload.data.coin.change) === 1 ? 'green' : Colors.error} type={'ionicon'} />
-              <Text style={{color: Math.sign(coin.payload.data.coin.change) === 1 ? 'green' : Colors.error, fontSize: 18}} >{_.ceil(coin.payload.data.coin.change, 2)}%</Text>
+              <Icon size={24} style={{ paddingHorizontal: 10 }} name={Math.sign(coin.payload.data.coin.change) === 1 ? 'trending-up-sharp' : 'trending-down-sharp'} color={Math.sign(_.get(coin, 'payload.data.coin.change')) === 1 ? 'green' : Colors.error} type={'ionicon'} />
+              <Text style={{color: Math.sign(_.get(coin, 'payload.data.coin.change')) === 1 ? 'green' : Colors.error, fontSize: 18}} >{_.ceil(_.get(coin, 'payload.data.coin.change'), 2)}%</Text>
             </View>
           </View>
           <Text style={[styles.sectionText, {color: Colors.charcoal}]}>Period {timePeriod.data.name} | Currency {refCurrencyUuid.data.name}</Text>
-          <View style={[styles.graphContainer, {shadowColor: coin.payload.data.coin.color || Colors.facebook}]}>
+          <View style={[styles.graphContainer, {shadowColor: _.get(coin, 'payload.data.coin.color') || Colors.facebook}]}>
             <YAxis
               style={{ marginHorizontal: 5 }}
-              data={coin.payload.data.coin.sparkline}
+              data={_.get(coin, 'payload.data.coin.sparkline')}
               contentInset={{ top: 20, bottom: 20 }}
               svg={{
-                fill: coin.payload.data.coin.color || Colors.facebook,
+                fill: _.get(coin, 'payload.data.coin.color') || Colors.facebook,
                 fontSize: 10
               }}
               numberOfTicks={10}
@@ -62,8 +62,8 @@ const CryptoOverview = (props) => {
           />
             <LineChart
               style={{ flex: 1 }}
-              data={toNumbers(coin.payload.data.coin.sparkline)}
-              svg={{ stroke: coin.payload.data.coin.color || Colors.facebook }}
+              data={toNumbers(_.get(coin, 'payload.data.coin.sparkline'))}
+              svg={{ stroke: _.get(coin, 'payload.data.coin.color') || Colors.facebook }}
               contentInset={{ top: 20, bottom: 20 }}
               animate
           >
@@ -72,18 +72,18 @@ const CryptoOverview = (props) => {
           </View>
           <View style={{ justifyContent: 'space-around', flexDirection: 'row' }} >
             <View style={styles.textContainer} >
-              <Text style={[Fonts.style.h4, styles.textMain]}>{_.ceil(coin.payload.data.coin.change, 2)}%</Text>
+              <Text style={[Fonts.style.h4, styles.textMain]}>{_.ceil(_.get(coin, 'payload.data.coin.change'), 2)}%</Text>
               <Text style={[Fonts.type.base, styles.textSub]}>{timePeriod.data.name} change</Text>
             </View>
             <View style={styles.textContainer} >
-              <Text style={[Fonts.style.h4, styles.textMain]}>{_.ceil(_.max(toNumbers(coin.payload.data.coin.sparkline)), 2)}</Text>
+              <Text style={[Fonts.style.h4, styles.textMain]}>{_.ceil(_.max(toNumbers(_.get(coin, 'payload.data.coin.sparkline'))), 2)}</Text>
               <View style={{ flexDirection: 'row' }}>
                 <Icon name={'arrow-up-right'} size={16} type={'feather'} color={Colors.charcoal} />
                 <Text style={[Fonts.type.base, styles.textSub]}>{timePeriod.data.name} Highest</Text>
               </View>
             </View>
             <View style={styles.textContainer} >
-              <Text style={[Fonts.style.h4, styles.textMain]}>{_.ceil(_.min(toNumbers(coin.payload.data.coin.sparkline)), 2)}</Text>
+              <Text style={[Fonts.style.h4, styles.textMain]}>{_.ceil(_.min(toNumbers(_.get(coin, 'payload.data.coin.sparkline'))), 2)}</Text>
               <View style={{ flexDirection: 'row' }}>
                 <Icon name={'arrow-down-right'} size={16} type={'feather'} color={Colors.charcoal} />
                 <Text style={[Fonts.type.base, styles.textSub]}>{timePeriod.data.name} Lowest</Text>
@@ -91,12 +91,12 @@ const CryptoOverview = (props) => {
             </View>
           </View>
           <HTML
-            tagsStyles={{ h3: { textAlign: 'center', fontStyle: 'italic', fontSize: 20, paddingVertical: 10, color: coin.payload.data.coin.color || Colors.facebook }, p: [styles.sectionText, {color: Colors.charcoal}] }}
+            tagsStyles={{ h3: { textAlign: 'center', fontStyle: 'italic', fontSize: 20, paddingVertical: 10, color: _.get(coin, 'payload.data.coin.color') || Colors.facebook }, p: [styles.sectionText, {color: Colors.charcoal}] }}
             containerStyle={{ margin: 10, paddingTop: 20 }}
-            html={coin.payload.data.coin.description}
+            html={_.get(coin, 'payload.data.coin.description')}
             imagesMaxWidth={Dimensions.get('window').width} />
-          {coin.payload.data.coin.links.length > 0 && <Card title={'Project links'}>
-            {coin.payload.data.coin.links.map((item, index) => <ListItem
+          {_.get(coin, 'payload.data.coin.links').length > 0 && <Card title={'Project links'}>
+            {_.get(coin, 'payload.data.coin.links').map((item, index) => <ListItem
               key={index}
               onPress={() => Linking.openURL(item.url)}
               title={item.name}
@@ -123,17 +123,17 @@ const CryptoOverview = (props) => {
             <View >
               <ListItem
                 title={'Circulating Supply'}
-                subtitle={coin.payload.data.coin.supply.circulating}
+                subtitle={_.get(coin, 'payload.data.coin.supply.circulating')}
                 bottomDivider
               />
               <ListItem
                 title={'Total Supply'}
-                subtitle={coin.payload.data.coin.supply.supply}
+                subtitle={_.get(coin, 'payload.data.coin.supply.supply')}
                 bottomDivider
               />
               <ListItem
                 title={'Available in Percentage'}
-                subtitle={((parseInt(coin.payload.data.coin.supply.circulating) / parseInt(coin.payload.data.coin.supply.supply)) * 100) + '%'}
+                subtitle={((parseInt(_.get(coin, 'payload.data.coin.supply.circulating')) / parseInt(_.get(coin, 'payload.data.coin.supply.supply'))) * 100) + '%'}
                 bottomDivider
               />
             </View>
@@ -141,28 +141,33 @@ const CryptoOverview = (props) => {
           <Card title={'Value statistics'}>
             <ListItem
               title={'Price to BTC'}
-              subtitle={coin.payload.data.coin.btcPrice}
+              subtitle={_.get(coin, 'payload.data.coin.btcPrice')}
               bottomDivider
             />
             <ListItem
               title={'Market cap'}
-              subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${coin.payload.data.coin.marketCap}`}
+              subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.get(coin, 'payload.data.coin.marketCap')}`}
               bottomDivider
             />
             <ListItem
               title={'Rank'}
-              subtitle={coin.payload.data.coin.rank}
+              subtitle={_.get(coin, 'payload.data.coin.rank')}
+              bottomDivider
+            />
+            <ListItem
+              title={'24h Volume'}
+              subtitle={_.get(coin, 'payload.data.coin.24hVolume')}
               bottomDivider
             />
             <ListItem
               title={'All-Time high'}
-              subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${coin.payload.data.coin.allTimeHigh.price}`}
+              subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.get(coin, 'payload.data.coin.allTimeHigh.price')}`}
               bottomDivider
             />
           </Card>
           {coin.payload.data.coin.websiteUrl && <Button
             style={{ marginVertical: 20, width: '90%', alignSelf: 'center' }}
-            title={coin.payload.data.coin.websiteUrl}
+            title={_.get(coin, 'payload.data.coin.websiteUrl')}
             type='outline'
           />}
         </View> : <BarIndicator color={Colors.facebook} style={styles.activity} />}
