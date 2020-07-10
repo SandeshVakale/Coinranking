@@ -91,7 +91,8 @@ const CryptoOverview = (props) => {
             </View>
           </View>
           <HTML
-            tagsStyles={{ h3: { textAlign: 'center', fontStyle: 'italic', fontSize: 20, paddingVertical: 10, color: _.get(coin, 'payload.data.coin.color') || Colors.facebook }, p: [styles.sectionText, {color: Colors.charcoal}] }}
+            tagsStyles={{ h3: { textAlign: 'center', fontStyle: 'italic', fontSize: 20, paddingVertical: 10, color: _.get(coin, 'payload.data.coin.color') || Colors.facebook },
+              p: styles.text}}
             containerStyle={{ margin: 10, paddingTop: 20 }}
             html={_.get(coin, 'payload.data.coin.description')}
             imagesMaxWidth={Dimensions.get('window').width} />
