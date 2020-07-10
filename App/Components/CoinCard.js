@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import _ from 'lodash'
 import { LineChart } from 'react-native-svg-charts'
 import styles from './Styles/CoinCardStyle'
@@ -9,10 +9,10 @@ import { connect } from 'react-redux'
 
 const CoinCard = (props) => {
   const { item } = props.data
-  const { uuid } = props
+  const { uuid, onPress } = props
   const toNumbers = arr => arr.map(Number)
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress} >
       <View style={{ flexDirection: 'column', justifyContent: 'space-around' }} >
         <View style={{ justifyContent: 'space-between', flexDirection: 'row' }} >
           <View style={{ flexDirection: 'row' }} >
@@ -37,12 +37,13 @@ const CoinCard = (props) => {
           animate
         />
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 
 CoinCard.propTypes = {
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
+  onPress: PropTypes.func
 }
 
 const mapStateToProps = (state) => {
