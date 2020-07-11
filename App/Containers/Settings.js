@@ -6,6 +6,7 @@ import { ListItem } from 'react-native-elements'
 import TimePeriodActions from '../Redux/TimePeriodRedux'
 import OrderByActions from '../Redux/OrderByRedux'
 import OrderDirectinRedux from '../Redux/OrderDirectionRedux'
+import OrderByExchangesActions from '../Redux/OrderByExchangesRedux'
 
 // Styles
 import styles from './Styles/SettingsStyle'
@@ -19,7 +20,7 @@ class Settings extends Component {
   // }
 
   render () {
-    const { uuid, setTimePeriod, timePeriod, orderBy, setOrderDirection, orderDirection, setOrderBy } = this.props
+    const { uuid, setTimePeriod, timePeriod, orderBy, setOrderDirection, orderDirection, setOrderBy, orderByExch, setOrderByExchanges } = this.props
 
     const timePeriodData = [
       {
@@ -44,7 +45,7 @@ class Settings extends Component {
       }
     ]
 
-    const orderByData = [
+    const orderByCoins = [
       {
         name: 'Price',
         value: 'price'
@@ -56,6 +57,21 @@ class Settings extends Component {
       {
         name: 'Change',
         value: 'change'
+      }
+    ]
+
+    const orderByExhanges = [
+      {
+        name: '24h Volume',
+        value: '24hVolume'
+      },
+      {
+        name: 'Markets',
+        value: 'numberOfMarkets'
+      },
+      {
+        name: 'Last Ticker',
+        value: 'lastTickerCreatedAt'
       }
     ]
 
@@ -84,10 +100,16 @@ class Settings extends Component {
         onPress: () => this.props.navigation.navigate('Currencies')
       },
       {
-        title: 'Order By',
+        title: 'Order By Crypto',
         icon: 'format-list-numbered',
         subtitle: orderBy.data.name,
-        onPress: () => this.props.navigation.navigate('Selector', {list: orderByData, onPressItem: setOrderBy, itemName: orderBy.data.name})
+        onPress: () => this.props.navigation.navigate('Selector', {list: orderByCoins, onPressItem: setOrderBy, itemName: orderBy.data.name})
+      },
+      {
+        title: 'Order By Exchanges',
+        icon: 'format-list-numbered',
+        subtitle: orderByExch.data.name,
+        onPress: () => this.props.navigation.navigate('Selector', {list: orderByExhanges, onPressItem: setOrderByExchanges, itemName: orderByExch.data.name})
       },
       {
         title: 'Order Direction',
@@ -122,7 +144,8 @@ const mapStateToProps = (state) => {
     uuid: state.uuid,
     timePeriod: state.timePeriod,
     orderBy: state.orderBy,
-    orderDirection: state.orderDirection
+    orderDirection: state.orderDirection,
+    orderByExch: state.orderByExchanges
   }
 }
 
@@ -130,7 +153,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setTimePeriod: (item) => dispatch(TimePeriodActions.timePeriodRequest(item)),
     setOrderBy: (item) => dispatch(OrderByActions.orderByRequest(item)),
-    setOrderDirection: (item) => dispatch(OrderDirectinRedux.orderDirectionRequest(item))
+    setOrderDirection: (item) => dispatch(OrderDirectinRedux.orderDirectionRequest(item)),
+    setOrderByExchanges: (item) => dispatch(OrderByExchangesActions.orderByExchangesRequest(item))
   }
 }
 
