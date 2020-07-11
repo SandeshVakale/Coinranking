@@ -39,7 +39,7 @@ const Crypto = (props) => {
           ListHeaderComponent={() => <View >
             <Filter {...props} />
             <SearchBar
-              placeholder='Quick Search'
+              placeholder='Crypto Search'
               onChangeText={setSearch}
               value={search}
               platform={'android'}

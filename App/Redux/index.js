@@ -13,7 +13,9 @@ export const reducers = combineReducers({
   orderBy: require('./OrderByRedux').reducer,
   orderDirection: require('./OrderDirectionRedux').reducer,
   coin: require('./CoinRedux').reducer,
-  coins: require('./CoinsRedux').reducer
+  coins: require('./CoinsRedux').reducer,
+  exchanges: require('./ExchangesRedux').reducer,
+  orderByExchanges: require('./OrderByExchangesRedux').reducer
 })
 
 export default () => {

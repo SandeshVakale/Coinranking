@@ -10,6 +10,7 @@ import DebugConfig from '../Config/DebugConfig'
 import { CurrenciesTypes } from '../Redux/CurrenciesRedux'
 import { CoinTypes } from '../Redux/CoinRedux'
 import { CoinsTypes } from '../Redux/CoinsRedux'
+import { ExchangesTypes } from '../Redux/ExchangesRedux'
 
 /* ------------- Sagas ------------- */
 //
@@ -18,6 +19,7 @@ import { CoinsTypes } from '../Redux/CoinsRedux'
 import { getCurrencies } from './CurrenciesSagas'
 import { getCoin } from './CoinSagas'
 import { getCoins } from './CoinsSagas'
+import { getExchanges } from './ExchangesSagas'
 
 /* ------------- API ------------- */
 
@@ -36,6 +38,7 @@ export default function * root () {
     // takeLatest(GithubTypes.USER_REQUEST, getUserAvatar, api),
     takeLatest(CurrenciesTypes.CURRENCIES_REQUEST, getCurrencies, api),
     takeLatest(CoinTypes.COIN_REQUEST, getCoin, api),
-    takeLatest(CoinsTypes.COINS_REQUEST, getCoins, api)
+    takeLatest(CoinsTypes.COINS_REQUEST, getCoins, api),
+    takeLatest(ExchangesTypes.EXCHANGES_REQUEST, getExchanges, api)
   ])
 }

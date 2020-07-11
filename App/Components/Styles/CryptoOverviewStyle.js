@@ -18,5 +18,15 @@ export default StyleSheet.create({
   },
   textContainer: {flexDirection: 'column', alignItems: 'center'},
   textMain: {fontWeight: 'bold', color: Colors.charcoal},
-  textSub: {fontWeight: 'bold', color: Colors.charcoal}
+  textSub: {fontWeight: 'bold', color: Colors.charcoal},
+  text: {
+    fontFamily: 'Avenir-Book',
+    fontSize: 14,
+    paddingVertical: 20,
+    marginVertical: 5,
+    textAlign: 'center',
+    color: Colors.charcoal,
+    marginTop: 14,
+    marginBottom: 14
+  }
 })
