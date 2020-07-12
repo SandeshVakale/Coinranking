@@ -58,7 +58,7 @@ const CryptoOverview = (props) => {
                 fontSize: 10
               }}
               numberOfTicks={10}
-              formatLabel={(value) => `${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.ceil(value, 2)}`}
+              formatLabel={(value) => `${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.ceil(value, 3)}`}
           />
             <LineChart
               style={{ flex: 1 }}
@@ -110,14 +110,14 @@ const CryptoOverview = (props) => {
             <PieChart data={[
               {
                 key: 1,
-                value: coin.payload.data.coin.supply.circulating,
+                value: ((parseInt(_.get(coin, 'payload.data.coin.supply.circulating')) / parseInt(_.get(coin, 'payload.data.coin.supply.supply'))) * 100),
                 svg: { fill: coin.payload.data.coin.color || Colors.facebook },
                 arc: { outerRadius: '130%', cornerRadius: 10 }
               },
               {
                 key: 2,
-                value: coin.payload.data.coin.supply.supply,
-                svg: { fill: Colors.facebook }
+                value: 100 - ((parseInt(_.get(coin, 'payload.data.coin.supply.circulating')) / parseInt(_.get(coin, 'payload.data.coin.supply.supply'))) * 100),
+                svg: { fill: Colors.cloud }
               }]} style={{ height: 200 }}
               outerRadius={'70%'}
               innerRadius={10} />
