@@ -1,25 +1,22 @@
-import React, { Component } from 'react'
-import { ScrollView, Text } from 'react-native'
+import React, { useEffect } from 'react'
+import { ScrollView, Text, View } from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
 // Styles
 import styles from './Styles/MarketDetailsStyle'
+import AppBar from '../Components/AppBar'
+import Error from '../Components/Error'
 
-class MarketDetails extends Component {
-  // constructor (props) {
-  //   super(props)
-  //   this.state = {}
-  // }
+const MarketDetails = (props) => {
+  const { name, uuid } = props.navigation.state.params
+  return (
+    <View style={styles.container}>
+      <AppBar title={name} onPressRight={() => props.navigation.navigate('Settings')} onPressLeft={() => props.navigation.goBack()} iconRight={'settings'} iconLeft={'chevron-left'} />
 
-  render () {
-    return (
-      <ScrollView style={styles.container}>
-        <Text>MarketDetails Container</Text>
-      </ScrollView>
-    )
-  }
+    </View>
+  )
 }
 
 const mapStateToProps = (state) => {

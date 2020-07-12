@@ -18,7 +18,7 @@ export const reducers = combineReducers({
   coins: require('./CoinsRedux').reducer,
   exchanges: require('./ExchangesRedux').reducer,
   orderByExchanges: require('./OrderByExchangesRedux').reducer,
-  markets: require('./ExchangesRedux').reducer,
+  markets: require('./MarketsRedux').reducer,
   orderByMarkets: require('./OrderByMarketsRedux').reducer
 })
 
