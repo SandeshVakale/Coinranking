@@ -17,10 +17,15 @@ import styles from './Styles/CryptoStyle'
 import { Colors } from '../Themes'
 
 const Crypto = (props) => {
+  const [refreshing, setRefreshing] = useState(false)
   const { getCoins, refCurrencyUuid, timePeriod, orderBy, orderDirection, coins } = props
   useEffect(() => {
     getCoins(refCurrencyUuid.data.uuid, timePeriod.data.value, orderBy.data.value, orderDirection.data.value)
   }, [ refCurrencyUuid, timePeriod, orderBy, orderDirection ])
+
+  useEffect(() => {
+    setRefreshing(false)
+  }, [coins])
 
   const keyExtractor = (item, index) => index.toString()
   const [search, setSearch] = useState('')
@@ -33,6 +38,12 @@ const Crypto = (props) => {
           searchAttribute={'name'}
           keyExtractor={keyExtractor}
           searchTerm={search}
+          refreshing={refreshing}
+          onRefresh={() => {
+            setRefreshing(true)
+            getCoins(refCurrencyUuid.data.uuid, timePeriod.data.value, orderBy.data.value, orderDirection.data.value)
+          }
+          }
           data={coins.payload.data.coins}
           renderItem={(item) => <CoinCard data={item} onPress={() => props.navigation.navigate('CryptoDetail', {item})} />}
           ListFooterComponent={() => <View style={{ height: 100 }} />}
