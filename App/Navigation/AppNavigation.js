@@ -1,4 +1,5 @@
 import { createAppContainer } from 'react-navigation'
+import SettingsOrderBy from '../Containers/SettingsOrderBy'
 import Selector from '../Containers/Selector'
 import Currencies from '../Containers/Currencies'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -57,6 +58,7 @@ const TabNavigator = createBottomTabNavigator({
 
 // Manifest of possible screens
 const PrimaryNav = createStackNavigator({
+  SettingsOrderBy: { screen: SettingsOrderBy },
   Selector: { screen: Selector },
   Currencies: { screen: Currencies },
   ExchangeDetails: { screen: ExchangeDetails },
