@@ -14,13 +14,19 @@ import { BarIndicator } from 'react-native-indicators'
 import Error from '../Components/Error'
 
 class Currencies extends Component {
-  // constructor (props) {
-  //   super(props)
-  //   this.state = {}
-  // }
+  constructor (props) {
+    super(props)
+    this.state = { refreshing: false }
+  }
   componentDidMount () {
     const { getCurrencies } = this.props
     getCurrencies()
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if (prevProps.currency !== this.props.currency) {
+      this.setState({ refreshing: false })
+    }
   }
 
   keyExtractor = (item, index) => index.toString()
@@ -52,6 +58,12 @@ class Currencies extends Component {
             keyExtractor={this.keyExtractor}
             data={currency.payload.data.currencies}
             renderItem={this.renderItem}
+            onRefresh={() => {
+              getCurrencies()
+              this.setState({refreshing: true})
+            }
+            }
+            refreshing={this.state.refreshing}
         /> : <BarIndicator color={Colors.facebook} style={styles.activity} />}
       </View>
     )

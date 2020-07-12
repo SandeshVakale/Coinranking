@@ -15,15 +15,15 @@ import Error from '../Components/Error'
 import { BarIndicator } from 'react-native-indicators'
 
 const Markets = (props) => {
-  // constructor (props) {
-  //   super(props)
-  //   this.state = {}
-  // }
-
+  const [refreshing, setRefreshing] = useState(false)
   const { getMarkets, refCurrencyUuid, orderByMarkets, orderDirection, markets } = props
   useEffect(() => {
     getMarkets(refCurrencyUuid.data.uuid, orderByMarkets.data.value, orderDirection.data.value)
   }, [ refCurrencyUuid, orderByMarkets, orderDirection ])
+
+  useEffect(() => {
+    setRefreshing(false)
+  }, [markets])
   const keyExtractor = (item, index) => index.toString()
   const [search, setSearch] = useState('')
   return (
@@ -35,6 +35,11 @@ const Markets = (props) => {
           searchAttribute={'exchangeName'}
           keyExtractor={keyExtractor}
           searchTerm={search}
+          refreshing={refreshing}
+          onRefresh={() => {
+            setRefreshing(true)
+            getMarkets(refCurrencyUuid.data.uuid, orderByMarkets.data.value, orderDirection.data.value)
+          }}
           data={_.get(markets, 'payload.data.markets')}
           renderItem={(item) => <ListItem onPress={() => props.navigation.navigate('MarketDetails', {uuid: item.item.uuid, name: `${item.item.baseSymbol}/${item.item.quoteSymbol}`})} containerStyle={{ backgroundColor: Colors.transparent, underlayColor: Colors.transparent }} title={`${item.item.baseSymbol}/${item.item.quoteSymbol}`} subtitle={item.item.exchangeName} leftAvatar={{ source: _.get(item, 'item.exchangeIconUrl') && { uri: _.get(item, 'item.exchangeIconUrl').replace(/\.(svg)($|\?)/, '.png$2') } }} bottomDivider
             chevron badge={{ value: `${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.ceil(_.get(item, 'item.price'), 2)}` }} />}
