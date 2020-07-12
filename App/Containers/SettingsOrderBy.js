@@ -65,19 +65,19 @@ class SettingsOrderBy extends Component {
     const list = [
       {
         title: 'Crypto',
-        icon: 'format-list-numbered',
+        icon: 'death-star',
         subtitle: orderBy.data.name,
         onPress: () => this.props.navigation.navigate('Selector', {list: orderByCoins, onPressItem: setOrderBy, itemName: orderBy.data.name})
       },
       {
         title: 'Exchanges',
-        icon: 'format-list-numbered',
+        icon: 'chart-bar',
         subtitle: orderByExch.data.name,
         onPress: () => this.props.navigation.navigate('Selector', {list: orderByExhanges, onPressItem: setOrderByExchanges, itemName: orderByExch.data.name})
       },
       {
         title: 'Markets',
-        icon: 'format-list-numbered',
+        icon: 'chart-bubble',
         subtitle: orderByMark.data.name,
         onPress: () => this.props.navigation.navigate('Selector', {list: orderByMarkets, onPressItem: setOrderByMarkets, itemName: orderByMark.data.name})
       }
@@ -91,7 +91,7 @@ class SettingsOrderBy extends Component {
               key={i}
               title={item.title}
               subtitle={item.subtitle}
-              leftIcon={{ name: item.icon, color: Colors.facebook, size: 30 }}
+              leftIcon={{ name: item.icon, color: Colors.facebook, size: 30, type: 'material-community' }}
               bottomDivider
               chevron
               onPress={item.onPress}
