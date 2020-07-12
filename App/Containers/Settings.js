@@ -7,6 +7,7 @@ import TimePeriodActions from '../Redux/TimePeriodRedux'
 import OrderByActions from '../Redux/OrderByRedux'
 import OrderDirectinRedux from '../Redux/OrderDirectionRedux'
 import OrderByExchangesActions from '../Redux/OrderByExchangesRedux'
+import OrderByMarketsAtions from '../Redux/OrderByMarketsRedux'
 
 // Styles
 import styles from './Styles/SettingsStyle'
@@ -20,7 +21,7 @@ class Settings extends Component {
   // }
 
   render () {
-    const { uuid, setTimePeriod, timePeriod, orderBy, setOrderDirection, orderDirection, setOrderBy, orderByExch, setOrderByExchanges } = this.props
+    const { uuid, setOrderByMarkets, orderByMark, setTimePeriod, timePeriod, orderBy, setOrderDirection, orderDirection, setOrderBy, orderByExch, setOrderByExchanges } = this.props
 
     const timePeriodData = [
       {
@@ -57,6 +58,17 @@ class Settings extends Component {
       {
         name: 'Change',
         value: 'change'
+      }
+    ]
+
+    const orderByMarkets = [
+      {
+        name: 'Price',
+        value: 'price'
+      },
+      {
+        name: '24h Volume',
+        value: '24hVolume'
       }
     ]
 
@@ -112,6 +124,12 @@ class Settings extends Component {
         onPress: () => this.props.navigation.navigate('Selector', {list: orderByExhanges, onPressItem: setOrderByExchanges, itemName: orderByExch.data.name})
       },
       {
+        title: 'Order By Markets',
+        icon: 'format-list-numbered',
+        subtitle: orderByMark.data.name,
+        onPress: () => this.props.navigation.navigate('Selector', {list: orderByMarkets, onPressItem: setOrderByMarkets, itemName: orderByMark.data.name})
+      },
+      {
         title: 'Order Direction',
         icon: 'format-line-spacing',
         subtitle: orderDirection.data.name,
@@ -145,7 +163,8 @@ const mapStateToProps = (state) => {
     timePeriod: state.timePeriod,
     orderBy: state.orderBy,
     orderDirection: state.orderDirection,
-    orderByExch: state.orderByExchanges
+    orderByExch: state.orderByExchanges,
+    orderByMark: state.orderByMarkets
   }
 }
 
@@ -154,7 +173,8 @@ const mapDispatchToProps = (dispatch) => {
     setTimePeriod: (item) => dispatch(TimePeriodActions.timePeriodRequest(item)),
     setOrderBy: (item) => dispatch(OrderByActions.orderByRequest(item)),
     setOrderDirection: (item) => dispatch(OrderDirectinRedux.orderDirectionRequest(item)),
-    setOrderByExchanges: (item) => dispatch(OrderByExchangesActions.orderByExchangesRequest(item))
+    setOrderByExchanges: (item) => dispatch(OrderByExchangesActions.orderByExchangesRequest(item)),
+    setOrderByMarkets: (item) => dispatch(OrderByMarketsAtions.orderByMarketsRequest(item))
   }
 }
 
