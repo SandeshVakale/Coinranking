@@ -1,4 +1,5 @@
 import { createAppContainer } from 'react-navigation'
+import Overview from '../Containers/Overview'
 import SettingsOrderBy from '../Containers/SettingsOrderBy'
 import Selector from '../Containers/Selector'
 import Currencies from '../Containers/Currencies'
@@ -23,7 +24,8 @@ import React from 'react'
 const TabNavigator = createBottomTabNavigator({
   Crypto: { screen: Crypto },
   Exchanges: { screen: Exchanges },
-  Markets: { screen: Markets }
+  Markets: { screen: Markets },
+  Overview: { screen: Overview }
 }, {
   // Default config for all screens
   headerMode: 'none',
@@ -48,6 +50,8 @@ const TabNavigator = createBottomTabNavigator({
         iconName = focused ? 'chart-bubble' : 'chart-bubble'
       } else if (routeName === 'Exchanges') {
         iconName = focused ? 'chart-bar' : 'chart-bar'
+      } else if (routeName === 'Overview') {
+        iconName = focused ? 'earth' : 'earth'
       }
 
       // You can return any component that you like here!

@@ -20,7 +20,8 @@ export const reducers = combineReducers({
   orderByExchanges: require('./OrderByExchangesRedux').reducer,
   markets: require('./MarketsRedux').reducer,
   orderByMarkets: require('./OrderByMarketsRedux').reducer,
-  market: require('./MarketRedux').reducer
+  market: require('./MarketRedux').reducer,
+  overview: require('./OverviewRedux').reducer
 })
 
 export default () => {
