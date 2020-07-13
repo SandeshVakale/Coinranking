@@ -14,6 +14,7 @@ import { ExchangesTypes } from '../Redux/ExchangesRedux'
 import { MarketsTypes } from '../Redux/MarketsRedux'
 import { MarketTypes } from '../Redux/MarketRedux'
 import { OverviewTypes } from '../Redux/OverviewRedux'
+import { CoinExchangesTypes } from '../Redux/CoinExchangesRedux'
 
 /* ------------- Sagas ------------- */
 //
@@ -26,6 +27,7 @@ import { getExchanges } from './ExchangesSagas'
 import { getMarkets } from './MarketsSagas'
 import { getMarket } from './MarketSagas'
 import { getOverview } from './OverviewSagas'
+import { getCoinExchanges } from './CoinExchangesSagas'
 /* ------------- API ------------- */
 
 // The API we use is only used from Sagas, so we create it here and pass along
@@ -47,6 +49,7 @@ export default function * root () {
     takeLatest(ExchangesTypes.EXCHANGES_REQUEST, getExchanges, api),
     takeLatest(MarketsTypes.MARKETS_REQUEST, getMarkets, api),
     takeLatest(MarketTypes.MARKET_REQUEST, getMarket, api),
-    takeLatest(OverviewTypes.OVERVIEW_REQUEST, getOverview, api)
+    takeLatest(OverviewTypes.OVERVIEW_REQUEST, getOverview, api),
+    takeLatest(CoinExchangesTypes.COIN_EXCHANGES_REQUEST, getCoinExchanges, api)
   ])
 }

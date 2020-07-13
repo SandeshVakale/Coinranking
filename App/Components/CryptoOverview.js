@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import PropTypes from 'prop-types'
-import { View, Text, ScrollView, Dimensions, Linking } from 'react-native'
+import { View, Text, ScrollView, Dimensions, Linking, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { Image, Icon, ListItem, Button, Card } from 'react-native-elements'
 import _ from 'lodash'
@@ -47,7 +47,9 @@ const CryptoOverview = (props) => {
               <Text style={{color: Math.sign(_.get(coin, 'payload.data.coin.change')) === 1 ? 'green' : Colors.error, fontSize: 18}} >{_.ceil(_.get(coin, 'payload.data.coin.change'), 2)}%</Text>
             </View>
           </View>
-          <Text style={[styles.sectionText, {color: Colors.charcoal}]}>Period {timePeriod.data.name} | Currency {refCurrencyUuid.data.name}</Text>
+          <TouchableOpacity onPress={() => props.navigation.navigate('Settings')} >
+            <Text style={[styles.sectionText, {color: Colors.charcoal}]}>Period {timePeriod.data.name} | Currency {refCurrencyUuid.data.name}</Text>
+          </TouchableOpacity>
           <View style={[styles.graphContainer, {shadowColor: _.get(coin, 'payload.data.coin.color') || Colors.facebook}]}>
             <YAxis
               style={{ marginHorizontal: 5 }}
