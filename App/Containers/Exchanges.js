@@ -45,6 +45,7 @@ const Exchanges = (props) => {
           data={_.get(exchanges, 'payload.data.exchanges')}
           renderItem={(item) => <ListItem containerStyle={{ backgroundColor: Colors.transparent }} title={item.item.name} subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.ceil(_.get(item, 'item.24hVolume'), 2)}`} leftAvatar={{ source: _.get(item, 'item.iconUrl') && { uri: _.get(item, 'item.iconUrl').replace(/\.(svg)($|\?)/, '.png$2') } }} bottomDivider
             chevron
+            onPress={() => props.navigation.navigate('ExchangeDetails', {uuid: item.item.uuid, name: item.item.name})}
             badge={{ value: `${_.ceil(_.get(item, 'item.marketShare'), 2)} %` }} />}
           ListFooterComponent={() => <View style={{ height: 100 }} />}
           ListHeaderComponent={() => <View >
