@@ -3,6 +3,7 @@ import { Text, View, Dimensions } from 'react-native'
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view'
 import CryptoOverview from '../Components/CryptoOverview'
 import CoinExchanges from '../Components/CoinExchanges'
+import CoinMarkets from '../Components/CoinMarkets'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
 
@@ -19,9 +20,9 @@ const Exchanges = (props) => {
   return <CoinExchanges uuid={props.route.uuid} name={props.route.name} {...props.route} />
 }
 
-const Markets = () => (
-  <View style={[styles.scene]} />
-)
+const Markets = (props) => {
+  return <CoinMarkets uuid={props.route.uuid} name={props.route.name} {...props.route} />
+}
 
 const CryptoDetail = (props) => {
   const { item } = props.navigation.state.params.item
@@ -29,7 +30,7 @@ const CryptoDetail = (props) => {
   const [routes] = React.useState([
     { key: 'overview', title: 'Overview', uuid: item.uuid, ...props },
     { key: 'exchanges', title: 'Exchanges', uuid: item.uuid, name: item.name, ...props },
-    { key: 'markets', title: 'Markets', uuid: item.uuid, ...props }
+    { key: 'markets', title: 'Markets', uuid: item.uuid, name: item.name, ...props }
   ])
   const renderScene = SceneMap({
     overview: Overview,
