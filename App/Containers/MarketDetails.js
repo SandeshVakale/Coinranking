@@ -64,11 +64,13 @@ const MarketDetails = (props) => {
                 title={'Rank'}
                 subtitle={_.get(market, 'payload.data.market.rank')}
                 bottomDivider
+                leftIcon={{ name: 'gesture-swipe-up', color: Colors.facebook, size: 30, type: 'material-community' }}
               />
               <ListItem
                 title={'24h Volume'}
                 subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.get(market, 'payload.data.market.24hVolume')}`}
                 bottomDivider
+                leftIcon={{ name: 'chart-bar-stacked', color: Colors.facebook, size: 30, type: 'material-community' }}
               />
             </Card>
           </View>

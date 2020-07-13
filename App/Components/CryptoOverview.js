@@ -103,6 +103,7 @@ const CryptoOverview = (props) => {
               title={item.name}
               subtitle={item.type}
               bottomDivider
+              leftIcon={{ name: 'web', color: Colors.facebook, size: 30, type: 'material-community' }}
             />)
           }
           </Card>}
@@ -126,16 +127,19 @@ const CryptoOverview = (props) => {
                 title={'Circulating Supply'}
                 subtitle={_.get(coin, 'payload.data.coin.supply.circulating')}
                 bottomDivider
+                leftIcon={{ name: 'chart-donut', color: Colors.facebook, size: 30, type: 'material-community' }}
               />
               <ListItem
                 title={'Total Supply'}
                 subtitle={_.get(coin, 'payload.data.coin.supply.supply')}
                 bottomDivider
+                leftIcon={{ name: 'chart-pie', color: Colors.facebook, size: 30, type: 'material-community' }}
               />
               <ListItem
                 title={'Available in Percentage'}
                 subtitle={((parseInt(_.get(coin, 'payload.data.coin.supply.circulating')) / parseInt(_.get(coin, 'payload.data.coin.supply.supply'))) * 100) + '%'}
                 bottomDivider
+                leftIcon={{ name: 'brightness-percent', color: Colors.facebook, size: 30, type: 'material-community' }}
               />
             </View>
           </Card>}
@@ -144,26 +148,31 @@ const CryptoOverview = (props) => {
               title={'Price to BTC'}
               subtitle={_.get(coin, 'payload.data.coin.btcPrice')}
               bottomDivider
+              leftIcon={{ name: 'bitcoin', color: Colors.facebook, size: 30, type: 'material-community' }}
             />
             <ListItem
               title={'Market cap'}
               subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.get(coin, 'payload.data.coin.marketCap')}`}
               bottomDivider
+              leftIcon={{ name: 'chart-donut', color: Colors.facebook, size: 30, type: 'material-community' }}
             />
             <ListItem
               title={'Rank'}
               subtitle={_.get(coin, 'payload.data.coin.rank')}
               bottomDivider
+              leftIcon={{ name: 'gesture-swipe-up', color: Colors.facebook, size: 30, type: 'material-community' }}
             />
             <ListItem
               title={'24h Volume'}
               subtitle={_.get(coin, 'payload.data.coin.24hVolume')}
               bottomDivider
+              leftIcon={{ name: 'chart-bar-stacked', color: Colors.facebook, size: 30, type: 'material-community' }}
             />
             <ListItem
               title={'All-Time high'}
               subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.get(coin, 'payload.data.coin.allTimeHigh.price')}`}
               bottomDivider
+              leftIcon={{ name: 'trending-up-sharp', color: Colors.facebook, size: 30, type: 'ionicon' }}
             />
           </Card>
           {coin.payload.data.coin.websiteUrl && <Button

@@ -45,6 +45,7 @@ const create = (baseURL = Secrets.API_URL) => {
   const getExchanges = ({ referenceCurrencyUuid, orderBy, orderDirection }) => api.get('exchanges', { referenceCurrencyUuid, orderBy, orderDirection, limit: 100 })
   const getMarkets = ({ referenceCurrencyUuid, orderBy, orderDirection }) => api.get('markets', { referenceCurrencyUuid, orderBy, orderDirection, limit: 100 })
   const getMarket = ({uuid, referenceCurrencyUuid}) => api.get(`market/${uuid}`, { referenceCurrencyUuid })
+  const getOverview = ({ referenceCurrencyUuid }) => api.get('stats', { referenceCurrencyUuid })
 
   // ------
   // STEP 3
@@ -68,7 +69,8 @@ const create = (baseURL = Secrets.API_URL) => {
     getCoins,
     getExchanges,
     getMarkets,
-    getMarket
+    getMarket,
+    getOverview
   }
 }
 
