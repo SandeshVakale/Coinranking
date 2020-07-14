@@ -30,7 +30,7 @@ const CoinExchanges = (props) => {
           keyExtractor={keyExtractor}
           renderItem={(item) => <ListItem containerStyle={{ backgroundColor: Colors.transparent }} title={item.item.name} subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.ceil(_.get(item, 'item.price'), 5)}`} leftAvatar={{ source: _.get(item, 'item.iconUrl') && { uri: _.get(item, 'item.iconUrl').replace(/\.(svg)($|\?)/, '.png$2') } }}
             bottomDivider
-            onPress={() => props.navigation.navigate('ExchangeDetails', {uuid: item.item.uuid, name: item.item.name})}
+            onPress={() => props.navigation.navigate('ExchangeDetails', {item})}
             chevron />} /> : <BarIndicator color={Colors.facebook} style={styles.activity} />}
     </View>
   )

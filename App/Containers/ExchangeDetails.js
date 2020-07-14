@@ -17,11 +17,11 @@ const Overview = (props) => {
 }
 
 const Cryptocurrencies = (props) => {
-  return <ExchangeMarkets uuid={props.route.uuid} name={props.route.name} {...props.route} />
+  return <ExchangeCoins uuid={props.route.uuid} name={props.route.name} {...props.route} />
 }
 
 const Markets = (props) => {
-  return <ExchangeCoins uuid={props.route.uuid} name={props.route.name} {...props.route} />
+  return <ExchangeMarkets uuid={props.route.uuid} name={props.route.name} {...props.route} />
 }
 
 const ExchangeDetails = (props) => {
