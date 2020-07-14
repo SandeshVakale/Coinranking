@@ -1,4 +1,4 @@
-import { takeLatest, all } from 'redux-saga/effects'
+import { takeLatest, all, takeEvery } from 'redux-saga/effects'
 import API from '../Services/Api'
 import FixtureAPI from '../Services/FixtureApi'
 import DebugConfig from '../Config/DebugConfig'
@@ -16,6 +16,7 @@ import { MarketTypes } from '../Redux/MarketRedux'
 import { OverviewTypes } from '../Redux/OverviewRedux'
 import { CoinExchangesTypes } from '../Redux/CoinExchangesRedux'
 import { CoinMarketsTypes } from '../Redux/CoinMarketsRedux'
+import { SearchSuggestionsTypes } from '../Redux/SearchSuggestionsRedux'
 
 /* ------------- Sagas ------------- */
 //
@@ -30,6 +31,7 @@ import { getMarket } from './MarketSagas'
 import { getOverview } from './OverviewSagas'
 import { getCoinExchanges } from './CoinExchangesSagas'
 import { getCoinMarkets } from './CoinMarketsSagas'
+import { getSearchSuggestions } from './SearchSuggestionsSagas'
 /* ------------- API ------------- */
 
 // The API we use is only used from Sagas, so we create it here and pass along
@@ -53,6 +55,7 @@ export default function * root () {
     takeLatest(MarketTypes.MARKET_REQUEST, getMarket, api),
     takeLatest(OverviewTypes.OVERVIEW_REQUEST, getOverview, api),
     takeLatest(CoinExchangesTypes.COIN_EXCHANGES_REQUEST, getCoinExchanges, api),
-    takeLatest(CoinMarketsTypes.COIN_MARKETS_REQUEST, getCoinMarkets, api)
+    takeLatest(CoinMarketsTypes.COIN_MARKETS_REQUEST, getCoinMarkets, api),
+    takeEvery(SearchSuggestionsTypes.SEARCH_SUGGESTIONS_REQUEST, getSearchSuggestions, api)
   ])
 }
