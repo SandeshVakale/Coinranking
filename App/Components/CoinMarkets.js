@@ -25,7 +25,7 @@ const CoinMarkets = (props) => {
       <TouchableOpacity onPress={() => props.navigation.navigate('Settings')} >
         <Text style={[styles.sectionText, { color: Colors.charcoal, marginTop: -30 }]} >Currency {refCurrencyUuid.data.name} | Order {orderDirection.data.name}</Text>
       </TouchableOpacity>
-      <Error data={coinMarkets} />
+      <Error data={coinMarkets} onPress={() => getCoinMarkets(uuid, refCurrencyUuid.data.uuid, orderDirection.data.value)}/>
       {coinMarkets.fetching === false && coinMarkets.error === null
         ? <FlatList
           keyExtractor={keyExtractor}
