@@ -29,7 +29,7 @@ const ExchangeDetails = (props) => {
   const [index, setIndex] = React.useState(0)
   const [routes] = React.useState([
     { key: 'overview', title: 'Overview', uuid: item.uuid, ...props },
-    { key: 'cryptocurrencies', title: 'Cryptocurrencies', uuid: item.uuid, name: item.name, ...props },
+    { key: 'cryptocurrencies', title: 'Crypto', uuid: item.uuid, name: item.name, ...props },
     { key: 'markets', title: 'Markets', uuid: item.uuid, name: item.name, ...props }
   ])
   const renderScene = SceneMap({
