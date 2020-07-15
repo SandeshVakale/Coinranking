@@ -26,7 +26,8 @@ export const reducers = combineReducers({
   coinMarkets: require('./CoinMarketsRedux').reducer,
   searchResult: require('./SearchSuggestionsRedux').reducer,
   exchange: require('./ExchangeRedux').reducer,
-  exchangeCoins: require('./ExchangeCoinsRedux').reducer
+  exchangeCoins: require('./ExchangeCoinsRedux').reducer,
+  exchangeMarkets: require('./ExchangeMarketsRedux').reducer
 })
 
 export default () => {

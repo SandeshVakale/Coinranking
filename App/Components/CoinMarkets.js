@@ -7,9 +7,8 @@ import CoinMarketsActions from '../Redux/CoinMarketsRedux'
 import { connect } from 'react-redux'
 import { Colors } from '../Themes'
 import Error from './Error'
-import { SearchableFlatList } from 'react-native-searchable-list'
 import _ from 'lodash'
-import { Icon, ListItem, SearchBar } from 'react-native-elements'
+import { ListItem } from 'react-native-elements'
 import { BarIndicator } from 'react-native-indicators'
 
 const CoinMarkets = (props) => {

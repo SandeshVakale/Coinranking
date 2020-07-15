@@ -13,7 +13,6 @@ import { BarIndicator } from 'react-native-indicators'
 
 const ExchangeCoins = (props) => {
   const { uuid, name, getExchangeCoins, refCurrencyUuid, orderDirection, exchangeCoins } = props
-
   useEffect(() => {
     getExchangeCoins(uuid, refCurrencyUuid.data.uuid, orderDirection.data.value)
   }, [ refCurrencyUuid, orderDirection, uuid, name ])
@@ -28,7 +27,7 @@ const ExchangeCoins = (props) => {
       {exchangeCoins.fetching === false && exchangeCoins.error === null
         ? <FlatList data={_.get(exchangeCoins, 'payload.data.coins')}
           keyExtractor={keyExtractor}
-          renderItem={(item) => <ListItem containerStyle={{ backgroundColor: Colors.transparent }} title={item.item.name} subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.ceil(_.get(item, 'item.price'), 5)}`} leftAvatar={{ source: _.get(item, 'item.iconUrl') && { uri: _.get(item, 'item.iconUrl').replace(/\.(svg)($|\?)/, '.png$2') } }}
+          renderItem={(item) => <ListItem containerStyle={{ backgroundColor: Colors.transparent }} title={item.item.name} subtitle={item.item.symbol} badge={{value: `${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.ceil(_.get(item, 'item.price'), 2)}`}} leftAvatar={{ source: _.get(item, 'item.iconUrl') && { uri: _.get(item, 'item.iconUrl').replace(/\.(svg)($|\?)/, '.png$2') } }}
             bottomDivider
             onPress={() => props.navigation.navigate('CryptoDetail', {item})}
             chevron />} /> : <BarIndicator color={Colors.facebook} style={styles.activity} />}
