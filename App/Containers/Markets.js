@@ -29,6 +29,23 @@ const Markets = (props) => {
   return (
     <View style={styles.container}>
       <AppBar title={'Markets'} onPressRight={() => props.navigation.navigate('Settings')} onPressLeft={() => props.navigation.navigate('Search')} iconRight={'settings'} iconLeft={'search'} />
+      <TouchableOpacity onPress={() => props.navigation.navigate('Settings')} >
+        <Text style={[styles.sectionText, { color: Colors.charcoal }]} >{refCurrencyUuid.data.name} | {orderByMarkets.data.name} | {orderDirection.data.name} </Text>
+      </TouchableOpacity>
+      <SearchBar
+        placeholder='Markets Search'
+        onChangeText={setSearch}
+        value={search}
+        platform={'android'}
+        containerStyle={styles.searchBar}
+        searchIcon={<Icon
+          name='text-box-search'
+          type='material-community'
+          color={Colors.facebook}
+          size={30}
+        />}
+        leftIconContainerStyle={{ paddingLeft: 10 }}
+      />
       <Error data={markets} onPress={() => getMarkets(refCurrencyUuid.data.uuid, orderByMarkets.data.value, orderDirection.data.value)} />
       {markets.fetching === false && markets.error === null
         ? <SearchableFlatList
@@ -40,29 +57,10 @@ const Markets = (props) => {
             setRefreshing(true)
             getMarkets(refCurrencyUuid.data.uuid, orderByMarkets.data.value, orderDirection.data.value)
           }}
-          data={_.get(markets, 'payload.data.markets')}
+          data={_.get(markets, 'payload.data.markets', [])}
           renderItem={(item) => <ListItem onPress={() => props.navigation.navigate('MarketDetails', {uuid: item.item.uuid, name: `${item.item.baseSymbol}/${item.item.quoteSymbol}`})} containerStyle={{ backgroundColor: Colors.transparent, underlayColor: Colors.transparent }} title={`${item.item.baseSymbol}/${item.item.quoteSymbol}`} subtitle={item.item.exchangeName} leftAvatar={{ source: _.get(item, 'item.exchangeIconUrl') && { uri: _.get(item, 'item.exchangeIconUrl').replace(/\.(svg)($|\?)/, '.png$2') } }} bottomDivider
             chevron badge={{ value: `${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.ceil(_.get(item, 'item.price'), 2)}` }} />}
           ListFooterComponent={() => <View style={{ height: 100 }} />}
-          ListHeaderComponent={() => <View >
-            <TouchableOpacity onPress={() => props.navigation.navigate('Settings')} >
-              <Text style={[styles.sectionText, { color: Colors.charcoal }]} >{refCurrencyUuid.data.name} | {orderByMarkets.data.name} | {orderDirection.data.name} </Text>
-            </TouchableOpacity>
-            <SearchBar
-              placeholder='Markets Search'
-              onChangeText={setSearch}
-              value={search}
-              platform={'android'}
-              containerStyle={styles.searchBar}
-              searchIcon={<Icon
-                name='text-box-search'
-                type='material-community'
-                color={Colors.facebook}
-                size={30}
-              />}
-              leftIconContainerStyle={{ paddingLeft: 10 }}
-            />
-          </View>}
         /> : <BarIndicator color={Colors.facebook} style={styles.activity} />}
     </View>
   )

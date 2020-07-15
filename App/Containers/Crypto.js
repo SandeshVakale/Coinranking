@@ -8,6 +8,7 @@ import AppBar from '../Components/AppBar'
 import Error from '../Components/Error'
 import CoinCard from '../Components/CoinCard'
 import Filter from '../Components/Filter'
+import _ from 'lodash'
 
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 import CoinsActions from '../Redux/CoinsRedux'
@@ -32,6 +33,21 @@ const Crypto = (props) => {
   return (
     <View style={styles.container}>
       <AppBar title={'Cryptocurrencies'} onPressRight={() => props.navigation.navigate('Settings')} onPressLeft={() => props.navigation.navigate('Search')} iconRight={'settings'} iconLeft={'search'} />
+      <Filter {...props} />
+      <SearchBar
+        placeholder='Crypto Search'
+        onChangeText={setSearch}
+        value={search}
+        platform={'android'}
+        containerStyle={styles.searchBar}
+        searchIcon={<Icon
+          name='text-box-search'
+          type='material-community'
+          color={Colors.facebook}
+          size={30}
+        />}
+        leftIconContainerStyle={{ paddingLeft: 10 }}
+      />
       <Error data={coins} onPress={() => getCoins(refCurrencyUuid.data.uuid, timePeriod.data.value, orderBy.data.value, orderDirection.data.value)} />
       {coins.fetching === false && coins.error === null
         ? <SearchableFlatList
@@ -44,26 +60,9 @@ const Crypto = (props) => {
             getCoins(refCurrencyUuid.data.uuid, timePeriod.data.value, orderBy.data.value, orderDirection.data.value)
           }
           }
-          data={coins.payload.data.coins}
+          data={_.get(coins, 'payload.data.coins', [])}
           renderItem={(item) => <CoinCard data={item} onPress={() => props.navigation.navigate('CryptoDetail', {item})} />}
           ListFooterComponent={() => <View style={{ height: 100 }} />}
-          ListHeaderComponent={() => <View >
-            <Filter {...props} />
-            <SearchBar
-              placeholder='Crypto Search'
-              onChangeText={setSearch}
-              value={search}
-              platform={'android'}
-              containerStyle={styles.searchBar}
-              searchIcon={<Icon
-                name='text-box-search'
-                type='material-community'
-                color={Colors.facebook}
-                size={30}
-              />}
-              leftIconContainerStyle={{ paddingLeft: 10 }}
-            />
-          </View>}
         /> : <BarIndicator color={Colors.facebook} style={styles.activity} />}
     </View>
   )

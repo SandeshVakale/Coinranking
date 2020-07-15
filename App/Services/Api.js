@@ -1,9 +1,9 @@
 // a library to wrap and simplify api calls
 import apisauce from 'apisauce'
-import Secrets from 'react-native-config'
+import Config from '../Config/AppConfig'
 
 // our "constructor"
-const create = (baseURL = Secrets.API_URL) => {
+const create = (baseURL = Config.API_URL) => {
   // ------
   // STEP 1
   // ------
@@ -16,7 +16,7 @@ const create = (baseURL = Secrets.API_URL) => {
     // here are some default headers
     headers: {
       'Cache-Control': 'no-cache',
-      'x-access-token': Secrets.API_KEY
+      'x-access-token': Config.API_KEY
     },
     // 10 second timeout...
     timeout: 10000
