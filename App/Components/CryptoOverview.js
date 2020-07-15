@@ -21,7 +21,7 @@ const CryptoOverview = (props) => {
   const toNumbers = arr => arr.map(Number)
   return (
     <ScrollView style={styles.container}>
-      <Error data={coin} />
+      <Error data={coin} onPress={() => getCoin(uuid, refCurrencyUuid.data.uuid, timePeriod.data.value)} />
       {coin.fetching === false && coin.error === null
         ? <View style={{ flexDirection: 'column' }}>
           <View style={{ justifyContent: 'center', alignItems: 'center' }} >
@@ -179,8 +179,9 @@ const CryptoOverview = (props) => {
           </Card>
           {coin.payload.data.coin.websiteUrl && <Button
             style={{ marginVertical: 20, width: '90%', alignSelf: 'center' }}
-            title={_.get(coin, 'payload.data.coin.websiteUrl')}
+            title={'Visit Website'}
             type='outline'
+            onPress={() => Linking.openURL(_.get(coin, 'payload.data.coin.websiteUrl'))}
           />}
         </View> : <BarIndicator color={Colors.facebook} style={styles.activity} />}
     </ScrollView>

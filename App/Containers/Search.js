@@ -65,7 +65,7 @@ const Search = (props) => {
               <FlatList data={_.get(searchResult, 'payload.data.exchanges')}
                 renderItem={(item) => <ListItem title={item.item.name}
                   bottomDivider
-                  onPress={() => props.navigation.navigate('ExchangeDetails', {uuid: item.item.uuid, name: item.item.name})}
+                  onPress={() => props.navigation.navigate('ExchangeDetails', {item})}
                   chevron
                   leftAvatar={{ source: _.get(item, 'item.iconUrl') && { uri: _.get(item, 'item.iconUrl').replace(/\.(svg)($|\?)/, '.png$2') } }} />} />
             }
