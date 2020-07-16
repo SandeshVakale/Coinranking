@@ -3,7 +3,7 @@ import DebugConfig from '../Config/DebugConfig'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import RootContainer from './RootContainer'
-import { StatusBar } from 'react-native'
+import { BackHandler } from 'react-native'
 import createStore from '../Redux'
 
 // create our store
@@ -19,10 +19,21 @@ const store = createStore()
  * We separate like this to play nice with React Native's hot reloading.
  */
 class App extends Component {
+  componentDidMount () {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton)
+  }
+
+  componentWillUnmount () {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton)
+  }
+
+  handleBackButton () {
+    return true
+  }
+
   render () {
     return (
       <Provider store={store}>
-        <StatusBar hidden />
         <RootContainer />
       </Provider>
     )
