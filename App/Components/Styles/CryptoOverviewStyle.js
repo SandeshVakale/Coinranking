@@ -14,7 +14,8 @@ export default StyleSheet.create({
       height: 15
     },
     shadowOpacity: 0.7,
-    shadowRadius: 3.84
+    shadowRadius: 3.84,
+    elevation: 20
   },
   textContainer: {flexDirection: 'column', alignItems: 'center'},
   textMain: {fontWeight: 'bold', color: Colors.charcoal},
