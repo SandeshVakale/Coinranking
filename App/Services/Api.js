@@ -1,8 +1,9 @@
 // a library to wrap and simplify api calls
 import apisauce from 'apisauce'
+import Config from '../Config/AppConfig'
 
 // our "constructor"
-const create = (baseURL = 'https://api.github.com/') => {
+const create = (baseURL = Config.API_URL) => {
   // ------
   // STEP 1
   // ------
@@ -14,7 +15,8 @@ const create = (baseURL = 'https://api.github.com/') => {
     baseURL,
     // here are some default headers
     headers: {
-      'Cache-Control': 'no-cache'
+      'Cache-Control': 'no-cache',
+      'x-access-token': Config.API_KEY
     },
     // 10 second timeout...
     timeout: 10000
@@ -34,9 +36,22 @@ const create = (baseURL = 'https://api.github.com/') => {
   // Since we can't hide from that, we embrace it by getting out of the
   // way at this level.
   //
-  const getRoot = () => api.get('')
-  const getRate = () => api.get('rate_limit')
-  const getUser = (username) => api.get('search/users', {q: username})
+  // const getRoot = () => api.get('')
+  // const getRate = () => api.get('rate_limit')
+  // const getUser = (username) => api.get('search/users', {q: username})
+  const getCurrencies = () => api.get('reference-currencies', { limit: 100 })
+  const getCoin = ({ uuid, referenceCurrencyUuid, timePeriod }) => api.get(`coin/${uuid}`, { referenceCurrencyUuid, timePeriod })
+  const getCoins = ({ referenceCurrencyUuid, timePeriod, orderBy, orderDirection }) => api.get('coins', { referenceCurrencyUuid, timePeriod, orderBy, orderDirection, limit: 100 })
+  const getExchanges = ({ referenceCurrencyUuid, orderBy, orderDirection }) => api.get('exchanges', { referenceCurrencyUuid, orderBy, orderDirection, limit: 100 })
+  const getMarkets = ({ referenceCurrencyUuid, orderBy, orderDirection }) => api.get('markets', { referenceCurrencyUuid, orderBy, orderDirection, limit: 100 })
+  const getMarket = ({uuid, referenceCurrencyUuid}) => api.get(`market/${uuid}`, { referenceCurrencyUuid })
+  const getOverview = ({ referenceCurrencyUuid }) => api.get('stats', { referenceCurrencyUuid })
+  const getCoinExchanges = ({ uuid, referenceCurrencyUuid, orderDirection }) => api.get(`coin/${uuid}/exchanges`, { referenceCurrencyUuid, orderDirection, limit: 100 })
+  const getCoinMarkets = ({ uuid, referenceCurrencyUuid, orderDirection }) => api.get(`coin/${uuid}/markets`, { referenceCurrencyUuid, orderDirection, limit: 100 })
+  const getSearchSuggestions = ({ query }) => api.get('search-suggestions', { query })
+  const getExchange = ({uuid, referenceCurrencyUuid}) => api.get(`exchange/${uuid}`, {referenceCurrencyUuid})
+  const getExchangeCoins = ({ uuid, referenceCurrencyUuid, orderDirection }) => api.get(`exchange/${uuid}/coins`, { referenceCurrencyUuid, orderDirection, limit: 100 })
+  const getExchangeMarkets = ({ uuid, referenceCurrencyUuid, orderDirection }) => api.get(`exchange/${uuid}/markets`, { referenceCurrencyUuid, orderDirection, limit: 100 })
 
   // ------
   // STEP 3
@@ -52,9 +67,22 @@ const create = (baseURL = 'https://api.github.com/') => {
   //
   return {
     // a list of the API functions from step 2
-    getRoot,
-    getRate,
-    getUser
+    // getRoot,
+    // getRate,
+    // getUser,
+    getCurrencies,
+    getCoin,
+    getCoins,
+    getExchanges,
+    getMarkets,
+    getMarket,
+    getOverview,
+    getCoinExchanges,
+    getCoinMarkets,
+    getSearchSuggestions,
+    getExchange,
+    getExchangeCoins,
+    getExchangeMarkets
   }
 }
 

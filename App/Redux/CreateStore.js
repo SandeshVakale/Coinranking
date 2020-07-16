@@ -1,6 +1,9 @@
 import { createStore, applyMiddleware, compose } from 'redux'
+import Rehydration from '../Services/Rehydration'
+import ReduxPersist from '../Config/ReduxPersist'
 import Config from '../Config/DebugConfig'
 import createSagaMiddleware from 'redux-saga'
+import logger from 'redux-logger'
 import ScreenTracking from './ScreenTrackingMiddleware'
 import { appNavigatorMiddleware } from '../Navigation/ReduxNavigation'
 import Reactotron from '../Config/ReactotronConfig'
@@ -23,6 +26,9 @@ export default (rootReducer, rootSaga) => {
   const sagaMonitor = Config.useReactotron ? console.tron.createSagaMonitor() : null
   const sagaMiddleware = createSagaMiddleware({ sagaMonitor })
   middleware.push(sagaMiddleware)
+  if (__DEV__) {
+    middleware.push(logger)
+  }
 
   /* ------------- Assemble Middleware ------------- */
 
@@ -34,6 +40,11 @@ export default (rootReducer, rootSaga) => {
     enhancers.push(Reactotron.createEnhancer())
   }
   const store = createAppropriateStore(rootReducer, compose(...enhancers))
+
+  // configure persistStore and check reducer version number
+  if (ReduxPersist.active) {
+    Rehydration.updateReducers(store)
+  }
 
   // kick off root saga
   let sagasManager = sagaMiddleware.run(rootSaga)
