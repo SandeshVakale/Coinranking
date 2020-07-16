@@ -49,7 +49,7 @@ const Search = (props) => {
         leftIconContainerStyle={{ paddingLeft: 10 }}
       />
       {
-        searchResult.fetching === false && searchResult.error === null ? <ScrollView >
+        searchResult.fetching === false && searchResult.error === null ? <ScrollView style={{ marginBottom: 5 }}>
           <Card title={'Cryptocurrencies'}>
             {
               <FlatList data={_.get(searchResult, 'payload.data.coins')}
