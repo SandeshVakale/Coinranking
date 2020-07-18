@@ -44,7 +44,7 @@
 		00E356EE1AD99517003FC87E /* CoinrankingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoinrankingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* CoinrankingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoinrankingTests.m; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* Coinranking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coinranking.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* CoinData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Coinranking/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Coinranking/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -200,7 +200,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* Coinranking.app */,
+				13B07F961A680F5B00A75B9A /* CoinData.app */,
 				00E356EE1AD99517003FC87E /* CoinrankingTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* Coinranking-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* Coinranking-tvOSTests.xctest */,
@@ -256,7 +256,7 @@
 			);
 			name = Coinranking;
 			productName = Coinranking;
-			productReference = 13B07F961A680F5B00A75B9A /* Coinranking.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* CoinData.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2D02E47A1E0B4A5D006451C7 /* Coinranking-tvOS */ = {
@@ -725,7 +725,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Coinranking.app/Coinranking";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoinData.app/CoinData";
 			};
 			name = Debug;
 		};
@@ -747,7 +747,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Coinranking.app/Coinranking";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CoinData.app/CoinData";
 			};
 			name = Release;
 		};
@@ -772,7 +772,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Coinranking.v2;
-				PRODUCT_NAME = Coinranking;
+				PRODUCT_NAME = CoinData;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Coinranking-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -801,7 +801,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Coinranking.v2;
-				PRODUCT_NAME = Coinranking;
+				PRODUCT_NAME = CoinData;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Coinranking-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
