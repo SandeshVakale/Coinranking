@@ -1,4 +1,5 @@
 import { createAppContainer } from 'react-navigation'
+import DetailGraph from '../Containers/DetailGraph'
 import Overview from '../Containers/Overview'
 import SettingsOrderBy from '../Containers/SettingsOrderBy'
 import Selector from '../Containers/Selector'
@@ -62,6 +63,7 @@ const TabNavigator = createBottomTabNavigator({
 
 // Manifest of possible screens
 const PrimaryNav = createStackNavigator({
+  DetailGraph: { screen: DetailGraph },
   SettingsOrderBy: { screen: SettingsOrderBy },
   Selector: { screen: Selector },
   Currencies: { screen: Currencies },

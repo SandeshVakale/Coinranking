@@ -50,7 +50,7 @@ const CryptoOverview = (props) => {
           <TouchableOpacity onPress={() => props.navigation.navigate('Settings')} >
             <Text style={[styles.sectionText, {color: Colors.charcoal}]}>Period {timePeriod.data.name} | Currency {refCurrencyUuid.data.name}</Text>
           </TouchableOpacity>
-          <View style={[styles.graphContainer, {shadowColor: _.get(coin, 'payload.data.coin.color') || Colors.facebook}]}>
+          <TouchableOpacity onPress={() => props.navigation.navigate('DetailGraph', {uuid})} style={[styles.graphContainer, {shadowColor: _.get(coin, 'payload.data.coin.color') || Colors.facebook}]}>
             <YAxis
               style={{ marginHorizontal: 5 }}
               data={_.get(coin, 'payload.data.coin.sparkline')}
@@ -71,7 +71,7 @@ const CryptoOverview = (props) => {
           >
               <Grid />
             </LineChart>
-          </View>
+          </TouchableOpacity>
           <View style={{ justifyContent: 'space-around', flexDirection: 'row' }} >
             <View style={styles.textContainer} >
               <Text style={[Fonts.style.h4, styles.textMain]}>{_.ceil(_.get(coin, 'payload.data.coin.change'), 2)}%</Text>
