@@ -109,17 +109,17 @@ const CryptoOverview = (props) => {
             />)
           }
           </Card>}
-          {coin.payload.data.coin.supply.supply && <Card title={'Supply information'}>
+          {coin.payload.data.coin.supply.total && <Card title={'Supply information'}>
             <PieChart data={[
               {
                 key: 1,
-                value: ((parseInt(_.get(coin, 'payload.data.coin.supply.circulating')) / parseInt(_.get(coin, 'payload.data.coin.supply.supply'))) * 100),
+                value: ((parseInt(_.get(coin, 'payload.data.coin.supply.circulating')) / parseInt(_.get(coin, 'payload.data.coin.supply.total'))) * 100),
                 svg: { fill: coin.payload.data.coin.color || Colors.facebook },
                 arc: { outerRadius: '130%', cornerRadius: 10 }
               },
               {
                 key: 2,
-                value: 100 - ((parseInt(_.get(coin, 'payload.data.coin.supply.circulating')) / parseInt(_.get(coin, 'payload.data.coin.supply.supply'))) * 100),
+                value: 100 - ((parseInt(_.get(coin, 'payload.data.coin.supply.circulating')) / parseInt(_.get(coin, 'payload.data.coin.supply.total'))) * 100),
                 svg: { fill: Colors.cloud }
               }]} style={{ height: 200 }}
               outerRadius={'70%'}
@@ -133,13 +133,13 @@ const CryptoOverview = (props) => {
               />
               <ListItem
                 title={'Total Supply'}
-                subtitle={_.get(coin, 'payload.data.coin.supply.supply')}
+                subtitle={_.get(coin, 'payload.data.coin.supply.total')}
                 bottomDivider
                 leftIcon={{ name: 'chart-pie', color: Colors.facebook, size: 30, type: 'material-community' }}
               />
               <ListItem
                 title={'Available in Percentage'}
-                subtitle={((parseInt(_.get(coin, 'payload.data.coin.supply.circulating')) / parseInt(_.get(coin, 'payload.data.coin.supply.supply'))) * 100) + '%'}
+                subtitle={_.ceil(((parseInt(_.get(coin, 'payload.data.coin.supply.circulating')) / parseInt(_.get(coin, 'payload.data.coin.supply.total'))) * 100), 3) + '%'}
                 bottomDivider
                 leftIcon={{ name: 'brightness-percent', color: Colors.facebook, size: 30, type: 'material-community' }}
               />
@@ -154,7 +154,7 @@ const CryptoOverview = (props) => {
             />
             <ListItem
               title={'Market cap'}
-              subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.get(coin, 'payload.data.coin.marketCap')}`}
+              subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.ceil(_.get(coin, 'payload.data.coin.marketCap'), 5)}`}
               bottomDivider
               leftIcon={{ name: 'chart-donut', color: Colors.facebook, size: 30, type: 'material-community' }}
             />
@@ -166,19 +166,19 @@ const CryptoOverview = (props) => {
             />
             <ListItem
               title={'24h Volume'}
-              subtitle={_.get(coin, 'payload.data.coin.24hVolume')}
+              subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.ceil(_.get(coin, 'payload.data.coin.24hVolume'), 5)}`}
               bottomDivider
               leftIcon={{ name: 'chart-bar-stacked', color: Colors.facebook, size: 30, type: 'material-community' }}
             />
             <ListItem
               title={'All-Time high'}
-              subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.get(coin, 'payload.data.coin.allTimeHigh.price')}`}
+              subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.ceil(_.get(coin, 'payload.data.coin.allTimeHigh.price'), 5)}`}
               bottomDivider
               leftIcon={{ name: 'trending-up-sharp', color: Colors.facebook, size: 30, type: 'ionicon' }}
             />
           </Card>
           {coin.payload.data.coin.websiteUrl && <Button
-            style={{ marginVertical: 20, width: '90%', alignSelf: 'center' }}
+            containerStyle={{ marginVertical: 20, width: '90%', alignSelf: 'center' }}
             title={'Visit Website'}
             type='outline'
             onPress={() => Linking.openURL(_.get(coin, 'payload.data.coin.websiteUrl'))}
