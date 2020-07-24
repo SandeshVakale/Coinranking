@@ -127,13 +127,13 @@ const CryptoOverview = (props) => {
             <View >
               <ListItem
                 title={'Circulating Supply'}
-                subtitle={_.get(coin, 'payload.data.coin.supply.circulating')}
+                subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.ceil(_.get(coin, 'payload.data.coin.supply.circulating'), 5)}`}
                 bottomDivider
                 leftIcon={{ name: 'chart-donut', color: Colors.facebook, size: 30, type: 'material-community' }}
               />
               <ListItem
                 title={'Total Supply'}
-                subtitle={_.get(coin, 'payload.data.coin.supply.total')}
+                subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.ceil(_.get(coin, 'payload.data.coin.supply.total'), 5)}`}
                 bottomDivider
                 leftIcon={{ name: 'chart-pie', color: Colors.facebook, size: 30, type: 'material-community' }}
               />
