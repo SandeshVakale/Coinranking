@@ -1,4 +1,4 @@
-import { createAppContainer } from 'react-navigation'
+import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import Overview from '../Containers/Overview'
 import SettingsOrderBy from '../Containers/SettingsOrderBy'
 import Selector from '../Containers/Selector'
@@ -70,11 +70,23 @@ const PrimaryNav = createStackNavigator({
   CryptoDetail: { screen: CryptoDetail },
   Search: { screen: Search },
   Settings: { screen: Settings },
-  SplashScreen: { screen: SplashScreen },
   LaunchScreen: { screen: LaunchScreen },
   TabNavigator: { screen: TabNavigator }
 }, {
   // Default config for all screens
+  headerMode: 'none',
+  initialRouteName: 'TabNavigator',
+  navigationOptions: {
+    headerStyle: styles.header
+  }
+})
+
+const SwitchNavigator = createSwitchNavigator({
+  SplashScreen: { screen: SplashScreen },
+  PrimaryNav: { screen: PrimaryNav }
+}, {
+  // Default config for all screens
+  backBehavior: 'none',
   headerMode: 'none',
   initialRouteName: 'SplashScreen',
   navigationOptions: {
@@ -82,4 +94,4 @@ const PrimaryNav = createStackNavigator({
   }
 })
 
-export default createAppContainer(PrimaryNav)
+export default createAppContainer(SwitchNavigator)

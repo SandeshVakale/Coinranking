@@ -63,7 +63,7 @@ const ExchangeOverview = (props) => {
               />
               <ListItem
                 title={'24h Volume'}
-                subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.get(exchange, 'payload.data.exchange.24hVolume')}`}
+                subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.ceil(_.get(exchange, 'payload.data.exchange.24hVolume'), 5)}`}
                 bottomDivider
                 leftIcon={{ name: 'chart-bar-stacked', color: Colors.facebook, size: 30, type: 'material-community' }}
               />
@@ -81,7 +81,7 @@ const ExchangeOverview = (props) => {
               />
             </Card>
           </View>
-          {_.get(exchange, 'payload.data.exchange.websiteUrl') && <Button type={'outline'} style={{ marginVertical: 20, width: '90%', alignSelf: 'center' }} title={'Visit Website'}
+          {_.get(exchange, 'payload.data.exchange.websiteUrl') && <Button type={'outline'} containerStyle={{ marginVertical: 20, width: '90%', alignSelf: 'center' }} title={'Visit Website'}
             onPress={() => Linking.openURL(_.get(exchange, 'payload.data.exchange.websiteUrl'))} />}
         </View> : <BarIndicator color={Colors.facebook} style={styles.activity} />}
     </ScrollView>

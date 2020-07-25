@@ -68,7 +68,7 @@ const MarketDetails = (props) => {
               />
               <ListItem
                 title={'24h Volume'}
-                subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.get(market, 'payload.data.market.24hVolume')}`}
+                subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.ceil(_.get(market, 'payload.data.market.24hVolume'), 5)}`}
                 bottomDivider
                 leftIcon={{ name: 'chart-bar-stacked', color: Colors.facebook, size: 30, type: 'material-community' }}
               />
