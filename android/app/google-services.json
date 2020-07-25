@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "660217717690",
+    "firebase_url": "https://coindata-67daa.firebaseio.com",
+    "project_id": "coindata-67daa",
+    "storage_bucket": "coindata-67daa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:660217717690:android:939fa4d5b6fab63b2fb383",
+        "android_client_info": {
+          "package_name": "com.coinrankingv2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "660217717690-733lq26e7pj386l6t8m5c87e71p1up21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeZoNMm73t0aBo-DUce0t4-EGvwO0wucs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "660217717690-733lq26e7pj386l6t8m5c87e71p1up21.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "660217717690-4a5c2jmf09ht9515lhfn054fo3b1ldl1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.Coinranking.v2",
+                "app_store_id": "1523896917"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
