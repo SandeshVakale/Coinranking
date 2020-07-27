@@ -20,7 +20,7 @@ class SplashScreen extends Component {
 
   componentDidMount () {
     setTimeout(() => {
-      this.props.navigation.navigate('TabNavigator')
+      this.props.navigation.navigate('PrimaryNav')
     }, 3000)
   }
 

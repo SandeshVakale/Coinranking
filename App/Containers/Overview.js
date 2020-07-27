@@ -28,9 +28,9 @@ const Overview = (props) => {
       <Error data={overview} onPress={() => getOverview(refCurrencyUuid.data.value)} />
       {overview.fetching === false && overview.error === null
       ? <ScrollView><Card containerStyle={{ marginBottom: 100 }}>
-        <ListItem title={'Crypto market cap'} bottomDivider subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.get(overview, 'payload.data.totalMarketCap')}`}
+        <ListItem title={'Crypto market cap'} bottomDivider subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.ceil(_.get(overview, 'payload.data.totalMarketCap'), 5)}`}
           leftIcon={{ name: 'chart-donut', color: Colors.facebook, size: 30, type: 'material-community' }} />
-        <ListItem title={'24h volume'} bottomDivider subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.get(overview, 'payload.data.total24hVolume')}`}
+        <ListItem title={'24h volume'} bottomDivider subtitle={`${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.ceil(_.get(overview, 'payload.data.total24hVolume'), 5)}`}
           leftIcon={{ name: 'chart-bar-stacked', color: Colors.facebook, size: 30, type: 'material-community' }} />
         <ListItem title={'Cryptocurrencies'} bottomDivider subtitle={_.get(overview, 'payload.data.totalCoins')}
           leftIcon={{ name: 'death-star', color: Colors.facebook, size: 30, type: 'material-community' }} />
