@@ -52,6 +52,7 @@ const create = (baseURL = Config.API_URL) => {
   const getExchange = ({uuid, referenceCurrencyUuid}) => api.get(`exchange/${uuid}`, {referenceCurrencyUuid})
   const getExchangeCoins = ({ uuid, referenceCurrencyUuid, orderDirection }) => api.get(`exchange/${uuid}/coins`, { referenceCurrencyUuid, orderDirection, limit: 100 })
   const getExchangeMarkets = ({ uuid, referenceCurrencyUuid, orderDirection }) => api.get(`exchange/${uuid}/markets`, { referenceCurrencyUuid, orderDirection, limit: 100 })
+  const getCoinHistory = ({ uuid, referenceCurrencyUuid, timePeriod }) => api.get(`coin/${uuid}/history`, { referenceCurrencyUuid, timePeriod })
 
   // ------
   // STEP 3
@@ -82,7 +83,8 @@ const create = (baseURL = Config.API_URL) => {
     getSearchSuggestions,
     getExchange,
     getExchangeCoins,
-    getExchangeMarkets
+    getExchangeMarkets,
+    getCoinHistory
   }
 }
 

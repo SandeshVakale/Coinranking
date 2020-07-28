@@ -4,6 +4,7 @@ import { View, Text, ScrollView, Dimensions, Linking, TouchableOpacity } from 'r
 import { connect } from 'react-redux'
 import { Image, Icon, ListItem, Button, Card } from 'react-native-elements'
 import _ from 'lodash'
+import CoinHistoryActions from '../Redux/CoinHistoryRedux'
 import { BarIndicator } from 'react-native-indicators'
 import CoinActions from '../Redux/CoinRedux'
 import styles from './Styles/CryptoOverviewStyle'
@@ -14,9 +15,13 @@ import HTML from 'react-native-render-html'
 import TimePeriodActions from '../Redux/TimePeriodRedux'
 
 const CryptoOverview = (props) => {
-  const { uuid, getCoin, refCurrencyUuid, timePeriod, coin } = props
+  const { uuid, getCoin, refCurrencyUuid, timePeriod, coin, getCoinHistory } = props
   useEffect(() => {
     getCoin(uuid, refCurrencyUuid.data.uuid, timePeriod.data.value)
+  }, [refCurrencyUuid, timePeriod])
+
+  useEffect(() => {
+    getCoinHistory(uuid, refCurrencyUuid.data.uuid, timePeriod.data.value)
   }, [refCurrencyUuid, timePeriod])
   const toNumbers = arr => arr.map(Number)
   return (
@@ -50,7 +55,7 @@ const CryptoOverview = (props) => {
           <TouchableOpacity onPress={() => props.navigation.navigate('Settings')} >
             <Text style={[styles.sectionText, {color: Colors.charcoal}]}>Period {timePeriod.data.name} | Currency {refCurrencyUuid.data.name}</Text>
           </TouchableOpacity>
-          <View style={[styles.graphContainer, {shadowColor: _.get(coin, 'payload.data.coin.color') || Colors.facebook}]}>
+          <TouchableOpacity onPress={() => props.navigation.navigate('DetailGraph', {uuid})} style={[styles.graphContainer, {shadowColor: _.get(coin, 'payload.data.coin.color') || Colors.facebook}]}>
             <YAxis
               style={{ marginHorizontal: 5 }}
               data={_.get(coin, 'payload.data.coin.sparkline')}
@@ -71,7 +76,7 @@ const CryptoOverview = (props) => {
           >
               <Grid />
             </LineChart>
-          </View>
+          </TouchableOpacity>
           <View style={{ justifyContent: 'space-around', flexDirection: 'row' }} >
             <View style={styles.textContainer} >
               <Text style={[Fonts.style.h4, styles.textMain]}>{_.ceil(_.get(coin, 'payload.data.coin.change'), 2)}%</Text>
@@ -203,7 +208,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getCoin: (uuid, referenceCurrencyUuid, timePeriod) => dispatch(CoinActions.coinRequest(uuid, referenceCurrencyUuid, timePeriod)),
-    setTimePeriod: (item) => dispatch(TimePeriodActions.timePeriodRequest(item))
+    setTimePeriod: (item) => dispatch(TimePeriodActions.timePeriodRequest(item)),
+    getCoinHistory: (uuid, referenceCurrencyUuid, timePeriod) => dispatch(CoinHistoryActions.coinHistoryRequest(uuid, referenceCurrencyUuid, timePeriod))
   }
 }
 
