@@ -98,8 +98,8 @@ class DetailGraph extends Component {
               borderColor: _.get(coin, 'payload.data.coin.color') || Colors.facebook}]} />
           </Svg>
           <Animated.View style={[styles.label, { borderColor: _.get(coin, 'payload.data.coin.color') || Colors.facebook, transform: [{ translateX }] }]}>
-            <TextInput style={{ paddingVertical: 0 }} ref={this.label} />
-            <TextInput style={{ paddingVertical: 0 }} ref={this.label2} />
+            <TextInput style={{ paddingVertical: 0, color: Colors.charcoal }} ref={this.label} />
+            <TextInput style={{ paddingVertical: 0, color: Colors.charcoal }} ref={this.label2} />
           </Animated.View>
           <Animated.ScrollView
             style={StyleSheet.absoluteFill}
@@ -138,7 +138,7 @@ class DetailGraph extends Component {
             />
             <Text style={{fontSize: 30, fontWeight: 'bold', color: Colors.charcoal}}>{refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} {_.ceil(_.get(coin, 'payload.data.coin.price'), 2)}</Text>
             <View style={{ flexDirection: 'row' }}>
-              <Icon size={24} style={{ paddingHorizontal: 10 }} name={Math.sign(coin.payload.data.coin.change) === 1 ? 'trending-up-sharp' : 'trending-down-sharp'} color={Math.sign(_.get(coin, 'payload.data.coin.change')) === 1 ? 'green' : Colors.error} type={'ionicon'} />
+              <Icon size={24} style={{ paddingHorizontal: 10 }} name={Math.sign(_.get(coin, 'payload.data.coin.change')) === 1 ? 'trending-up-sharp' : 'trending-down-sharp'} color={Math.sign(_.get(coin, 'payload.data.coin.change')) === 1 ? 'green' : Colors.error} type={'ionicon'} />
               <Text style={{color: Math.sign(_.get(coin, 'payload.data.coin.change')) === 1 ? 'green' : Colors.error, fontSize: 18}} >{_.ceil(_.get(coin, 'payload.data.coin.change'), 2)}%</Text>
             </View>
           </View>
@@ -148,14 +148,14 @@ class DetailGraph extends Component {
               <Text style={[Fonts.type.base, styles.textSub]}>{timePeriod.data.name} change</Text>
             </View>
             <View style={styles.textContainer} >
-              <Text style={[Fonts.style.h4, styles.textMain]}>{_.ceil(_.max(toNumbers(_.get(coin, 'payload.data.coin.sparkline'))), 2)}</Text>
+              <Text style={[Fonts.style.h4, styles.textMain]}>{_.ceil(_.max(toNumbers(_.get(coin, 'payload.data.coin.sparkline', []))), 2)}</Text>
               <View style={{ flexDirection: 'row' }}>
                 <Icon name={'arrow-up-right'} size={16} type={'feather'} color={Colors.charcoal} />
                 <Text style={[Fonts.type.base, styles.textSub]}>{timePeriod.data.name} Highest</Text>
               </View>
             </View>
             <View style={styles.textContainer} >
-              <Text style={[Fonts.style.h4, styles.textMain]}>{_.ceil(_.min(toNumbers(_.get(coin, 'payload.data.coin.sparkline'))), 2)}</Text>
+              <Text style={[Fonts.style.h4, styles.textMain]}>{_.ceil(_.min(toNumbers(_.get(coin, 'payload.data.coin.sparkline', []))), 2)}</Text>
               <View style={{ flexDirection: 'row' }}>
                 <Icon name={'arrow-down-right'} size={16} type={'feather'} color={Colors.charcoal} />
                 <Text style={[Fonts.type.base, styles.textSub]}>{timePeriod.data.name} Lowest</Text>
@@ -194,8 +194,8 @@ const styles = StyleSheet.create({
     width: labelWidth,
     padding: 10,
     borderRadius: cursorRadius,
-    borderWidth: 3,
-    backgroundColor: 'white'
+    borderWidth: 1,
+    backgroundColor: 'rgba(255,255,255, 0.8)'
   },
   textContainer: {flexDirection: 'column', alignItems: 'center'},
   textMain: {fontWeight: 'bold', color: Colors.charcoal},

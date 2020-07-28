@@ -36,6 +36,7 @@ const Crypto = (props) => {
       <Filter {...props} />
       <SearchBar
         placeholder='Crypto Search'
+        placeholderTextColor={Colors.charcoal}
         onChangeText={setSearch}
         value={search}
         platform={'android'}

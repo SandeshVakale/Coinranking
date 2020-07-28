@@ -36,6 +36,7 @@ const Search = (props) => {
       <Error data={searchResult} />
       <SearchBar
         placeholder='Deep Search'
+        placeholderTextColor={Colors.charcoal}
         onChangeText={getSearch}
         value={search}
         platform={'android'}

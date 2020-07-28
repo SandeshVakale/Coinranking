@@ -36,6 +36,7 @@ const Exchanges = (props) => {
       </TouchableOpacity>
       <SearchBar
         placeholder='Exchanges Search'
+        placeholderTextColor={Colors.charcoal}
         onChangeText={setSearch}
         value={search}
         platform={'android'}
