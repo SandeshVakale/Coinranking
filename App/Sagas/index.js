@@ -20,6 +20,7 @@ import { SearchSuggestionsTypes } from '../Redux/SearchSuggestionsRedux'
 import { ExchangeTypes } from '../Redux/ExchangeRedux'
 import { ExchangeCoinsTypes } from '../Redux/ExchangeCoinsRedux'
 import { ExchangeMarketsTypes } from '../Redux/ExchangeMarketsRedux'
+import { CoinHistoryTypes } from '../Redux/CoinHistoryRedux'
 
 /* ------------- Sagas ------------- */
 //
@@ -38,6 +39,7 @@ import { getSearchSuggestions } from './SearchSuggestionsSagas'
 import { getExchange } from './ExchangeSagas'
 import { getExchangeCoins } from './ExchangeCoinsSagas'
 import { getExchangeMarkets } from './ExchangeMarketsSagas'
+import { getCoinHistory } from './CoinHistorySagas'
 /* ------------- API ------------- */
 
 // The API we use is only used from Sagas, so we create it here and pass along
@@ -65,6 +67,7 @@ export default function * root () {
     takeEvery(SearchSuggestionsTypes.SEARCH_SUGGESTIONS_REQUEST, getSearchSuggestions, api),
     takeLatest(ExchangeTypes.EXCHANGE_REQUEST, getExchange, api),
     takeLatest(ExchangeCoinsTypes.EXCHANGE_COINS_REQUEST, getExchangeCoins, api),
-    takeLatest(ExchangeMarketsTypes.EXCHANGE_MARKETS_REQUEST, getExchangeMarkets, api)
+    takeLatest(ExchangeMarketsTypes.EXCHANGE_MARKETS_REQUEST, getExchangeMarkets, api),
+    takeLatest(CoinHistoryTypes.COIN_HISTORY_REQUEST, getCoinHistory, api)
   ])
 }

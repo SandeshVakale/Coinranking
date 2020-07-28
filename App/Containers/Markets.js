@@ -34,6 +34,7 @@ const Markets = (props) => {
       </TouchableOpacity>
       <SearchBar
         placeholder='Markets Search'
+        placeholderTextColor={Colors.charcoal}
         onChangeText={setSearch}
         value={search}
         platform={'android'}
