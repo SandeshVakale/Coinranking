@@ -29,7 +29,7 @@ const MarketDetails = (props) => {
           <View style={{ justifyContent: 'center', alignItems: 'center' }} >
             <Image
               placeholderStyle={{ backgroundColor: Colors.transparent }}
-              source={_.get(market, 'payload.data.market.exchangeIconUrl') && { uri: _.get(market, 'payload.data.market.exchangeIconUrl').replace(/\.(svg)($|\?)/, '.png$2') }}
+              source={_.get(market, 'payload.data.market.exchange.iconUrl') && { uri: _.get(market, 'payload.data.market.exchange.iconUrl').replace(/\.(svg)($|\?)/, '.png$2') }}
               style={{ width: 60,
                 height: 80,
                 marginTop: 10,
