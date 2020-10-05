@@ -29,7 +29,7 @@ const ExchangeMarkets = (props) => {
         ? <FlatList
           keyExtractor={keyExtractor}
           data={_.get(exchangeMarkets, 'payload.data.markets')}
-          renderItem={(item) => <ListItem onPress={() => props.navigation.navigate('MarketDetails', {uuid: item.item.uuid, name: `${item.item.baseSymbol}/${item.item.quoteSymbol}`})} containerStyle={{ backgroundColor: Colors.transparent, underlayColor: Colors.transparent }} title={`${item.item.baseSymbol}/${item.item.quoteSymbol}`} subtitle={item.item.exchangeName} leftAvatar={{ source: _.get(item, 'item.exchangeIconUrl') && { uri: _.get(item, 'item.exchangeIconUrl').replace(/\.(svg)($|\?)/, '.png$2') } }} bottomDivider
+          renderItem={(item) => <ListItem onPress={() => props.navigation.navigate('MarketDetails', {uuid: item.item.uuid, name: `${item.item.base.symbol}/${item.item.quote.symbol}`})} containerStyle={{ backgroundColor: Colors.transparent, underlayColor: Colors.transparent }} title={`${item.item.base.symbol}/${item.item.quote.symbol}`} subtitle={item.item.exchangeName} leftAvatar={{ source: _.get(item, 'item.exchange.iconUrl') && { uri: _.get(item, 'item.exchange.iconUrl').replace(/\.(svg)($|\?)/, '.png$2') } }} bottomDivider
             chevron badge={{ value: `${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.ceil(_.get(item, 'item.price'), 2)}` }} />}
         /> : <BarIndicator color={Colors.facebook} style={styles.activity} />}
     </View>
