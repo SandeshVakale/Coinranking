@@ -29,7 +29,7 @@ const MarketDetails = (props) => {
           <View style={{ justifyContent: 'center', alignItems: 'center' }} >
             <Image
               placeholderStyle={{ backgroundColor: Colors.transparent }}
-              source={_.get(market, 'payload.data.market.exchangeIconUrl') && { uri: _.get(market, 'payload.data.market.exchangeIconUrl').replace(/\.(svg)($|\?)/, '.png$2') }}
+              source={_.get(market, 'payload.data.market.exchange.iconUrl') && { uri: _.get(market, 'payload.data.market.exchange.iconUrl').replace(/\.(svg)($|\?)/, '.png$2') }}
               style={{ width: 60,
                 height: 80,
                 marginTop: 10,
@@ -43,7 +43,7 @@ const MarketDetails = (props) => {
                 shadowRadius: 3.84 }}
               PlaceholderContent={<BarIndicator color={Colors.facebook} style={{ backgroundColor: Colors.transparent }} />}
             />
-            <Text style={[styles.sectionText, {color: Colors.charcoal}]}>{_.get(market, 'payload.data.market.exchangeName')}</Text>
+            <Text style={[styles.sectionText, {color: Colors.charcoal}]}>{_.get(market, 'payload.data.market.exchange.name')}</Text>
             <Text style={{fontSize: 30, fontWeight: 'bold', color: Colors.charcoal}}>{refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} {_.ceil(_.get(market, 'payload.data.market.price'), 2)}</Text>
             <Card title={`Market Share ${_.ceil(_.get(market, 'payload.data.market.marketShare'), 2)} %`} containerStyle={{ width: '90%' }}>
               <PieChart data={[

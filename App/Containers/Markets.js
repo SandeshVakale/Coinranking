@@ -50,7 +50,7 @@ const Markets = (props) => {
       <Error data={markets} onPress={() => getMarkets(refCurrencyUuid.data.uuid, orderByMarkets.data.value, orderDirection.data.value)} />
       {markets.fetching === false && markets.error === null
         ? <SearchableFlatList
-          searchAttribute={'exchangeName'}
+          searchAttribute={'exchange.name'}
           keyExtractor={keyExtractor}
           searchTerm={search}
           refreshing={refreshing}
@@ -59,7 +59,7 @@ const Markets = (props) => {
             getMarkets(refCurrencyUuid.data.uuid, orderByMarkets.data.value, orderDirection.data.value)
           }}
           data={_.get(markets, 'payload.data.markets', [])}
-          renderItem={(item) => <ListItem onPress={() => props.navigation.navigate('MarketDetails', {uuid: item.item.uuid, name: `${item.item.baseSymbol}/${item.item.quoteSymbol}`})} containerStyle={{ backgroundColor: Colors.transparent, underlayColor: Colors.transparent }} title={`${item.item.baseSymbol}/${item.item.quoteSymbol}`} subtitle={item.item.exchangeName} leftAvatar={{ source: _.get(item, 'item.exchangeIconUrl') && { uri: _.get(item, 'item.exchangeIconUrl').replace(/\.(svg)($|\?)/, '.png$2') } }} bottomDivider
+          renderItem={(item) => <ListItem onPress={() => props.navigation.navigate('MarketDetails', {uuid: item.item.uuid, name: `${item.item.base.symbol}/${item.item.quote.symbol}`})} containerStyle={{ backgroundColor: Colors.transparent, underlayColor: Colors.transparent }} title={`${item.item.base.symbol}/${item.item.quote.symbol}`} subtitle={item.item.exchange.name} leftAvatar={{ source: _.get(item, 'item.exchange.iconUrl') && { uri: _.get(item, 'item.exchange.iconUrl').replace(/\.(svg)($|\?)/, '.png$2') } }} bottomDivider
             chevron badge={{ value: `${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.ceil(_.get(item, 'item.price'), 2)}` }} />}
           ListFooterComponent={() => <View style={{ height: 100 }} />}
         /> : <BarIndicator color={Colors.facebook} style={styles.activity} />}
