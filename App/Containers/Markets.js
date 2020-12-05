@@ -50,7 +50,7 @@ const Markets = (props) => {
       <Error data={markets} onPress={() => getMarkets(refCurrencyUuid.data.uuid, orderByMarkets.data.value, orderDirection.data.value)} />
       {markets.fetching === false && markets.error === null
         ? <SearchableFlatList
-          searchAttribute={'exchangeName'}
+          searchAttribute={'exchange.name'}
           keyExtractor={keyExtractor}
           searchTerm={search}
           refreshing={refreshing}

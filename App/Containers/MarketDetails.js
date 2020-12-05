@@ -43,7 +43,7 @@ const MarketDetails = (props) => {
                 shadowRadius: 3.84 }}
               PlaceholderContent={<BarIndicator color={Colors.facebook} style={{ backgroundColor: Colors.transparent }} />}
             />
-            <Text style={[styles.sectionText, {color: Colors.charcoal}]}>{_.get(market, 'payload.data.market.exchangeName')}</Text>
+            <Text style={[styles.sectionText, {color: Colors.charcoal}]}>{_.get(market, 'payload.data.market.exchange.name')}</Text>
             <Text style={{fontSize: 30, fontWeight: 'bold', color: Colors.charcoal}}>{refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} {_.ceil(_.get(market, 'payload.data.market.price'), 2)}</Text>
             <Card title={`Market Share ${_.ceil(_.get(market, 'payload.data.market.marketShare'), 2)} %`} containerStyle={{ width: '90%' }}>
               <PieChart data={[
