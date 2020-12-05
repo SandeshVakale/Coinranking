@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 // import PropTypes from 'prop-types';
-import { View, Text, ScrollView, Linking } from 'react-native'
+import { View, Text, ScrollView, Linking, Dimensions } from 'react-native'
 import styles from './Styles/ExchangeOverviewStyle'
 import ExchangeActions from '../Redux/ExchangeRedux'
 import { connect } from 'react-redux'
@@ -10,7 +10,7 @@ import { Colors } from '../Themes'
 import _ from 'lodash'
 import { BarIndicator } from 'react-native-indicators'
 import { PieChart } from 'react-native-svg-charts'
-
+import HTML from 'react-native-render-html'
 const ExchangeOverview = (props) => {
   const {refCurrencyUuid, exchange, getExchange, uuid} = props
   useEffect(() => {
@@ -38,8 +38,12 @@ const ExchangeOverview = (props) => {
                 shadowRadius: 3.84 }}
               PlaceholderContent={<BarIndicator color={Colors.facebook} style={{ backgroundColor: Colors.transparent }} />}
             />
-
-            <Text style={[styles.sectionText, {color: Colors.charcoal}]}>{_.get(exchange, 'payload.data.exchange.description')}</Text>
+            <HTML
+              tagsStyles={{ h3: { textAlign: 'center', fontStyle: 'italic', fontSize: 20, paddingVertical: 10, color: Colors.facebook },
+                p: styles.text}}
+              containerStyle={{ margin: 10, paddingTop: 20 }}
+              html={_.get(exchange, 'payload.data.exchange.description')}
+              imagesMaxWidth={Dimensions.get('window').width} />
             <Card title={`Market Share ${_.ceil(_.get(exchange, 'payload.data.exchange.marketShare'), 2)} %`} containerStyle={{ width: '90%' }}>
               <PieChart data={[
                 {
