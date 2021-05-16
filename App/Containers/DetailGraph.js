@@ -1,124 +1,108 @@
 // @flow
 import React, { Component } from 'react'
 import {
-  StyleSheet, View, Dimensions, Animated, TextInput, ScrollView, Text
+  StyleSheet, View, Dimensions, ScrollView, Text
 } from 'react-native'
-import Svg, {Path, Defs, LinearGradient, Stop} from 'react-native-svg'
-import * as path from 'svg-path-properties'
-import * as shape from 'd3-shape'
+import { LineChart } from 'react-native-svg-charts'
 import _ from 'lodash'
-import moment from 'moment'
-
-import {
-  scaleTime,
-  scaleLinear,
-  scaleQuantile
-} from 'd3-scale'
 import { connect } from 'react-redux'
 import { Colors, Fonts } from '../Themes'
 import AppBar from '../Components/AppBar'
 import { Icon, Image } from 'react-native-elements'
 import { BarIndicator } from 'react-native-indicators'
-
-// const {
-//   Path, Defs, LinearGradient, Stop
-// } = Svg
-const d3 = {
-  shape
-}
-
+import * as shape from 'd3-shape'
+import { Line } from 'react-native-svg'
+import moment from 'moment'
 const height = 400
 const { width } = Dimensions.get('window')
-const verticalPadding = 5
 const cursorRadius = 10
 const labelWidth = 150
-
 class DetailGraph extends Component {
-  cursor = React.createRef();
-
-  label = React.createRef();
-
-  label2 = React.createRef();
-
   state = {
-    x: new Animated.Value(0)
+    data: _.get(this.props.coinHistory, 'payload.data.history'),
+    tooltipX: null,
+    tooltipY: null,
+    tooltipIndex: null
   };
-  data = _.get(this.props.coinHistory, 'payload.data.history')
-
-  scaleX = scaleTime().domain([_.minBy(_.get(this.props.coinHistory, 'payload.data.history'), (o) => o.timestamp).timestamp, _.maxBy(_.get(this.props.coinHistory, 'payload.data.history'), (o) => o.timestamp).timestamp]).range([0, width])
-  scaleY = scaleLinear().domain([_.minBy(_.get(this.props.coinHistory, 'payload.data.history'), (o) => o.price).price, _.maxBy(_.get(this.props.coinHistory, 'payload.data.history'), (o) => o.price).price]).range([height - verticalPadding, verticalPadding])
-  scaleLabel = scaleQuantile().domain([_.minBy(_.get(this.props.coinHistory, 'payload.data.history'), (o) => o.price).price, _.maxBy(_.get(this.props.coinHistory, 'payload.data.history'), (o) => o.price).price]).range(_.map(_.get(this.props.coinHistory, 'payload.data.history'), 'price'))
-
-  scaleLabel2 = scaleQuantile().domain([_.minBy(_.get(this.props.coinHistory, 'payload.data.history'), (o) => o.timestamp).timestamp, _.maxBy(_.get(this.props.coinHistory, 'payload.data.history'), (o) => o.timestamp).timestamp]).range(_.map(_.get(this.props.coinHistory, 'payload.data.history'), 'timestamp'))
-  line = d3.shape.line()
-    .x(d => this.scaleX(d.timestamp))
-    .y(d => this.scaleY(d.price))
-    .curve(d3.shape.curveBasis)(this.data)
-  properties = path.svgPathProperties(this.line)
-  lineLength = this.properties.getTotalLength()
-  moveCursor (value) {
-    const { refCurrencyUuid } = this.props
-    const { x, y } = this.properties.getPointAtLength(this.lineLength - value)
-    this.cursor.current.setNativeProps({ top: y - cursorRadius, left: x - cursorRadius })
-    const label = this.scaleLabel(this.scaleY.invert(y))
-    const label2 = this.scaleLabel2(this.scaleX.invert(x))
-    this.label.current.setNativeProps({ text: `${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.ceil(label, 2)}` })
-    this.label2.current.setNativeProps({ text: `${moment.unix(label2).format('MM/DD/YYYY HH:mm')}` })
-  }
-
-  componentDidMount () {
-    this.state.x.addListener(({ value }) => this.moveCursor(value))
-    this.moveCursor(0)
-  }
 
   render () {
-    const { x } = this.state
+    const { data, tooltipX, tooltipY, tooltipIndex } = this.state
+    const Tooltip = ({
+      x,
+      tooltipX,
+      index
+    }) => {
+      return (
+        <Line
+          key={index}
+          strokeDasharray='5, 5'
+          y1={'0%'}
+          y2={'100%'}
+          x1={x(tooltipX)}
+          x2={x(tooltipX)}
+          stroke={'gray'}
+        />
+      )
+    }
     const toNumbers = arr => arr.map(Number)
     const { coin, refCurrencyUuid, timePeriod } = this.props
-    const translateX = x.interpolate({
-      inputRange: [0, this.lineLength],
-      outputRange: [width - labelWidth, 0],
-      extrapolate: 'clamp'
-    })
+    const contentInset = { top: 10, bottom: 7 }
+    const ChartPoints = ({ x }) =>
+      data.map((item, index) => (
+        <Line
+          key={index}
+          y1={'0%'}
+          y2={'100%'}
+          x1={x(item.timestamp)}
+          x2={x(item.timestamp)}
+          stroke={'transparent'}
+          fill='transparent'
+          onPressIn={() =>
+            this.setState({
+              tooltipX: item.timestamp,
+              tooltipY: item.price,
+              tooltipIndex: index
+            })
+          }
+          onPressOut={() =>
+            this.setState({
+              tooltipX: null,
+              tooltipY: null,
+              tooltipIndex: null
+            })
+          }
+        />
+      ))
     return (
       <View style={styles.root}>
         <AppBar title={_.get(coin, 'payload.data.coin.name', '')} onPressLeft={() => this.props.navigation.goBack()} iconLeft={'chevron-left'} />
         <ScrollView contentContainerStyle={styles.container}>
-          <Svg {...{ width, height }}>
-            <Defs>
-              <LinearGradient x1='50%' y1='0%' x2='50%' y2='100%' id='gradient'>
-                <Stop stopColor={_.get(coin, 'payload.data.coin.color') || Colors.facebook} offset='0%' />
-                <Stop stopColor='#eef6fd' offset='80%' />
-                <Stop stopColor='#FEFFFF' offset='100%' />
-              </LinearGradient>
-            </Defs>
-            <Path d={this.line} fill='transparent' stroke={_.get(coin, 'payload.data.coin.color') || Colors.facebook} strokeWidth={5} />
-            <Path d={`${this.line} L ${width} ${height} L 0 ${height}`} fill='url(#gradient)' />
-            <View ref={this.cursor} style={[styles.cursor, {
-              borderColor: _.get(coin, 'payload.data.coin.color') || Colors.facebook}]} />
-          </Svg>
-          <Animated.View style={[styles.label, { borderColor: _.get(coin, 'payload.data.coin.color') || Colors.facebook, transform: [{ translateX }] }]}>
-            <TextInput style={{ paddingVertical: 0, color: Colors.charcoal }} ref={this.label} />
-            <TextInput style={{ paddingVertical: 0, color: Colors.charcoal }} ref={this.label2} />
-          </Animated.View>
-          <Animated.ScrollView
-            style={StyleSheet.absoluteFill}
-            contentContainerStyle={{ width: this.lineLength * 2 }}
-            showsHorizontalScrollIndicator={false}
-            scrollEventThrottle={16}
-            bounces={false}
-            onScroll={Animated.event(
-              [
-                {
-                  nativeEvent: {
-                    contentOffset: { x }
-                  }
-                }
-              ],
-              { useNativeDriver: true }
-            )}
-            horizontal
-          />
+          {tooltipX && <View style={[styles.textContainer, { zIndex: 5, top: 5, left: 10, position: 'absolute' }]} >
+            <View>
+              <Text style={[Fonts.style.h4, styles.textMain]}>{refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} {_.ceil(tooltipY, 2)}</Text>
+              <Text style={[Fonts.type.base, styles.textSub]}>{moment.unix(tooltipX).format('MMM DD YYYY, HH:MM')}</Text>
+            </View>
+          </View>}
+          <LineChart
+            style={{ height: 400 }}
+            data={data}
+            svg={{
+              strokeWidth: 2,
+              stroke: _.get(coin, 'payload.data.coin.color') || Colors.facebook }}
+            contentInset={contentInset}
+            curve={shape.curveNatural}
+            xAccessor={({ item }) => item.timestamp}
+            yAccessor={({ item }) => parseFloat(item.price)}
+           >
+            <ChartPoints color='transparent' />
+            {tooltipX && <Tooltip
+              tooltipX={tooltipX}
+              tooltipY={tooltipY}
+              color='#003F5A'
+              index={tooltipIndex}
+              dataLength={data.length}
+            />}
+          </LineChart>
           <View style={{ justifyContent: 'center', alignItems: 'center' }} >
             <Image
               placeholderStyle={{ backgroundColor: Colors.transparent }}
@@ -176,7 +160,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    marginTop: 60,
+    paddingTop: 60,
     height,
     width
   },
