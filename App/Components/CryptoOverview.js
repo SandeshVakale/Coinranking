@@ -10,7 +10,7 @@ import CoinActions from '../Redux/CoinRedux'
 import styles from './Styles/CryptoOverviewStyle'
 import { Colors, Fonts } from '../Themes'
 import Error from './Error'
-import { LineChart, YAxis, Grid, PieChart } from 'react-native-svg-charts'
+import { LineChart, Grid, PieChart } from 'react-native-svg-charts'
 import HTML from 'react-native-render-html'
 import TimePeriodActions from '../Redux/TimePeriodRedux'
 
@@ -56,17 +56,6 @@ const CryptoOverview = (props) => {
             <Text style={[styles.sectionText, {color: Colors.charcoal}]}>Period {timePeriod.data.name} | Currency {refCurrencyUuid.data.name}</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => props.navigation.navigate('DetailGraph', {uuid})} style={[styles.graphContainer, {shadowColor: _.get(coin, 'payload.data.coin.color') || Colors.facebook}]}>
-            <YAxis
-              style={{ marginHorizontal: 5 }}
-              data={_.get(coin, 'payload.data.coin.sparkline')}
-              contentInset={{ top: 20, bottom: 20 }}
-              svg={{
-                fill: _.get(coin, 'payload.data.coin.color') || Colors.facebook,
-                fontSize: 10
-              }}
-              numberOfTicks={10}
-              formatLabel={(value) => `${refCurrencyUuid.data.sign || refCurrencyUuid.data.symbol} ${_.ceil(value, 3)}`}
-          />
             <LineChart
               style={{ flex: 1 }}
               data={toNumbers(_.get(coin, 'payload.data.coin.sparkline'))}
