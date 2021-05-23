@@ -21,6 +21,7 @@ import { ExchangeTypes } from '../Redux/ExchangeRedux'
 import { ExchangeCoinsTypes } from '../Redux/ExchangeCoinsRedux'
 import { ExchangeMarketsTypes } from '../Redux/ExchangeMarketsRedux'
 import { CoinHistoryTypes } from '../Redux/CoinHistoryRedux'
+import { NftsTypes } from '../Redux/NftsRedux'
 
 /* ------------- Sagas ------------- */
 //
@@ -40,6 +41,7 @@ import { getExchange } from './ExchangeSagas'
 import { getExchangeCoins } from './ExchangeCoinsSagas'
 import { getExchangeMarkets } from './ExchangeMarketsSagas'
 import { getCoinHistory } from './CoinHistorySagas'
+import { getNFTs } from './NftsSagas'
 /* ------------- API ------------- */
 
 // The API we use is only used from Sagas, so we create it here and pass along
@@ -68,6 +70,7 @@ export default function * root () {
     takeLatest(ExchangeTypes.EXCHANGE_REQUEST, getExchange, api),
     takeLatest(ExchangeCoinsTypes.EXCHANGE_COINS_REQUEST, getExchangeCoins, api),
     takeLatest(ExchangeMarketsTypes.EXCHANGE_MARKETS_REQUEST, getExchangeMarkets, api),
-    takeLatest(CoinHistoryTypes.COIN_HISTORY_REQUEST, getCoinHistory, api)
+    takeLatest(CoinHistoryTypes.COIN_HISTORY_REQUEST, getCoinHistory, api),
+    takeLatest(NftsTypes.NFTS_REQUEST, getNFTs, api)
   ])
 }

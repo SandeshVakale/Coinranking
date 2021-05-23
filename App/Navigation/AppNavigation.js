@@ -17,6 +17,7 @@ import SplashScreen from '../Containers/SplashScreen'
 import { createStackNavigator } from 'react-navigation-stack'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import LaunchScreen from '../Containers/LaunchScreen'
+import NftsList from '../Containers/NftsList'
 
 import styles from './Styles/NavigationStyles'
 import { Colors } from '../Themes'
@@ -26,6 +27,7 @@ const TabNavigator = createBottomTabNavigator({
   Crypto: { screen: Crypto },
   Exchanges: { screen: Exchanges },
   Markets: { screen: Markets },
+  Nfts: { screen: NftsList },
   Overview: { screen: Overview }
 }, {
   // Default config for all screens
@@ -53,6 +55,8 @@ const TabNavigator = createBottomTabNavigator({
         iconName = focused ? 'chart-bar' : 'chart-bar'
       } else if (routeName === 'Overview') {
         iconName = focused ? 'earth' : 'earth'
+      } else if (routeName === 'Nfts') {
+        iconName = focused ? 'sword' : 'sword'
       }
 
       // You can return any component that you like here!
